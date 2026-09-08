@@ -69,7 +69,7 @@ Chain `advisor` không chỉ sinh văn bản. Model tự xác định cần tra 
 
 ### Vài chỗ khó khác trong hệ thống
 
-| | |
+| Hạng mục | Bài toán và cách giải |
 |---|---|
 | **WebSocket scale ngang** | Khi chạy nhiều instance, người dùng nối vào instance B không nhận được tin sinh ra ở instance A. Tôi giải bằng **Redis pub/sub fan-out**: instance tạo tin *chỉ publish*, listener trên mọi instance mới lo phần gửi — nhờ vậy mỗi socket nhận **đúng một lần**. Tắt Redis thì tự lùi về quản lý trong bộ nhớ. |
 | **Cổng thanh toán SePay** | Thanh toán QR, **webhook xác thực bằng chữ ký HMAC** nên không ai giả được thông báo "đã thanh toán". Có chống giao dịch trùng, payout cho mentor và luồng hoàn tiền. |
@@ -132,7 +132,7 @@ Hệ thống đặt món trước và bán hàng tại quầy. Controller, DAO v
   <img src="https://skillicons.dev/icons?i=python,fastapi,postgres,redis,docker,githubactions,sklearn,opencv,ts,nextjs,react,tailwind,java,git,vercel&perline=8" alt="Tech stack">
 </div>
 
-| Nhóm | |
+| Nhóm | Công nghệ |
 |---|---|
 | **Ngôn ngữ** | Python · TypeScript · Java · SQL |
 | **AI / LLM** | Anthropic · OpenAI · Gemini · DeepSeek · function calling · structured output · streaming · prompt engineering · token & cost accounting |
