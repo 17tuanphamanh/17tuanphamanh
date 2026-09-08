@@ -34,16 +34,16 @@ Trong VOCA, tôi tự viết module **`ai_core`** làm tầng trung gian giữa 
 Đây là phần tôi tâm đắc nhất, vì nó giải quyết đúng những vấn đề chỉ lộ ra khi hệ thống chạy thật.
 
 ```mermaid
-flowchart LR
-    A["9 AI chains<br/>(tư vấn, gợi ý ngành,<br/>lộ trình, ghép mentor…)"] --> B{"routing.py<br/>phân tier tác vụ"}
-    B -->|cheap| C["DeepSeek<br/>khối lượng lớn"]
-    B -->|strong| D["Anthropic Opus<br/>suy luận quan trọng"]
-    C --> E["resolve_key()<br/>tự lùi sang key khác<br/>nếu chưa cấu hình"]
+flowchart TD
+    A["9 AI chain: tu van, goi y nganh, lo trinh, ghep mentor"] --> B{"routing.py - phan tier tac vu"}
+    B -->|"tier cheap"| C["DeepSeek - khoi luong lon, it rui ro"]
+    B -->|"tier strong"| D["Anthropic Opus - suy luan quan trong"]
+    C --> E["resolve_key - tu lui sang key khac neu thieu"]
     D --> E
-    E --> F["dispatch_json()<br/>output ràng buộc<br/>theo JSON schema"]
-    F -->|thành công| G["Ghi tokens_in / tokens_out<br/>→ pricing.py tính cost USD"]
-    F -->|thất bại| H["classify_error()<br/>8 loại lỗi"]
-    H --> I["Nói rõ vì sao fallback<br/>thay vì im lặng chạy mock"]
+    E --> F["dispatch_json - output rang buoc theo JSON schema"]
+    F -->|"thanh cong"| G["Ghi tokens_in / tokens_out, pricing.py tinh cost USD"]
+    F -->|"that bai"| H["classify_error - phan thanh 8 loai loi"]
+    H --> I["Bao ro ly do, thay vi im lang chay mock"]
 ```
 
 ### Bốn vấn đề thật và cách tôi xử lý
