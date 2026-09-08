@@ -1,120 +1,284 @@
 <div align="center">
+  <img src="assets/banner.png" alt="Phạm Tuấn Anh — AI Engineer & Machine Learning" width="100%">
+</div>
 
-# Phạm Tuấn Anh
+<div align="center">
 
-**Full-stack & Machine Learning Developer** · Hà Nội, Việt Nam
+  <a href="https://www.voca.io.vn">
+    <img src="https://img.shields.io/badge/Sản_phẩm_AI_đang_chạy-voca.io.vn-2563EB?style=for-the-badge&logo=googlechrome&logoColor=white&labelColor=0B1120">
+  </a>
+  <a href="mailto:phamtuana160324@gmail.com">
+    <img src="https://img.shields.io/badge/Email-phamtuana160324@gmail.com-EA4335?style=for-the-badge&logo=gmail&logoColor=white&labelColor=0B1120">
+  </a>
 
-Tôi xây sản phẩm chạy thật, có người dùng thật — không dừng ở notebook.
+<br><br>
 
-[![Website](https://img.shields.io/badge/Sản_phẩm_đang_chạy-voca.io.vn-0A66C2?style=for-the-badge)](https://www.voca.io.vn)
-[![Email](https://img.shields.io/badge/Email-phamtuana160324@gmail.com-EA4335?style=for-the-badge&logo=gmail&logoColor=white)](mailto:phamtuana160324@gmail.com)
+### Tôi đưa mô hình vào sản phẩm chạy thật — không dừng lại ở notebook.
+
+Việc khó của AI trong sản phẩm không nằm ở lúc gọi model, mà ở những gì bao quanh nó:<br>
+định tuyến chi phí, ràng buộc output, xử lý khi provider hỏng, và đo xem mỗi request tốn bao nhiêu tiền.
 
 </div>
 
----
-
-## 🚀 VOCA — Nền tảng hướng nghiệp · **đang chạy production**
-
-### 🔗 **[www.voca.io.vn](https://www.voca.io.vn)**
-
-Nền tảng hướng nghiệp cho học sinh - sinh viên: đánh giá năng lực, gợi ý ngành học,
-đặt lịch tư vấn với mentor và xây lộ trình sự nghiệp. Tên miền riêng, có Google Analytics,
-có điều khoản - chính sách bảo mật - chính sách hoàn tiền. **Một sản phẩm hoàn chỉnh, không phải đồ án.**
-
-**Bốn mảng sản phẩm:** Hành trình Ikigai · Trợ lý hướng nghiệp AI · Sàn Mentor · Gói thành viên
-
-<table>
-<tr><td><b>Frontend</b></td><td>Next.js 14 (App Router) · TypeScript · Zustand · Tailwind CSS · dark mode · SSR</td></tr>
-<tr><td><b>Backend</b></td><td>FastAPI · PostgreSQL · SQLAlchemy · Alembic · JWT auth</td></tr>
-<tr><td><b>Hạ tầng</b></td><td>Docker · docker-compose · Render · Vercel · 3 workflow GitHub Actions (CI, keepalive, migrate DB)</td></tr>
-<tr><td><b>Quy mô</b></td><td><b>824 file</b> · 378 frontend · 317 backend · <b>78 migration Alembic</b></td></tr>
-</table>
-
-**Những bài toán khó tôi đã phải tự giải trong dự án này:**
-
-| Bài toán | Cách xử lý |
-|---|---|
-| 💳 **Thanh toán & chi trả** | Payment transaction, payout cho mentor, thông tin ngân hàng, luồng rút tiền, coupon |
-| ⚖️ **Tranh chấp booking** | Bảng dispute riêng, cho đính kèm bằng chứng, admin note, phạt huỷ lịch phía chuyên gia |
-| 🕐 **Lịch hẹn đa múi giờ** | Booking gắn timezone, buffer & time-off của mentor, group session giới hạn số người |
-| 🔐 **Xác thực & phân quyền** | JWT + `token_version` để thu hồi token, xác thực email, 4 vai trò (học viên / mentor / chuyên gia / admin) |
-| 📊 **Vận hành** | Audit schema, analytics theo ngày, hệ thống báo cáo nội dung, notification, chat |
-
-> Repo hiện để private. Cần xem code khi phỏng vấn, tôi sẵn sàng mở quyền truy cập — cứ email cho tôi.
-
----
-
-## 🤖 Machine Learning
-
-### Explainable ML — Dự đoán khách hàng rời bỏ
-**[`churn-explainable-ml`](https://github.com/17tuanphamanh/churn-explainable-ml)** · **[`Churn_Data_Processing`](https://github.com/17tuanphamanh/Churn_Data_Processing)**
-
-Dự đoán churn trên 10.000 hồ sơ khách hàng ngân hàng (churn rate 20,37%), rồi dùng SHAP để giải thích
-mô hình dựa vào đâu mà quyết định — mục tiêu cuối là **playbook giữ chân theo từng phân khúc**, không dừng ở accuracy.
-
-| Chỉ số | Kết quả |
-|---|---|
-| Mô hình tốt nhất | HistGradientBoosting + `class_weight` |
-| Test PR-AUC / ROC-AUC | **0,674 / 0,846** |
-| Ngưỡng theo recall ≥ 0,70 | 0,475 → Recall **0,690** · Precision 0,513 · F1 0,589 |
-| Yếu tố chi phối (SHAP) | Age > NumOfProducts > Geography |
-
-Hai điểm tôi làm kỹ:
-- **Chống rò rỉ dữ liệu:** preprocessor chỉ `fit` trên train rồi mới `transform` cho val/test. Split stratified 70/15/15, `random_state=42`, chạy lại ra đúng số cũ.
-- **Giữ lại kết quả âm tính:** SMOTE *không* cải thiện so với `class_weight` ở mức mất cân bằng này. Tôi ghi thẳng vào báo cáo thay vì bỏ đi cho đẹp.
-
-### Phát hiện cháy thời gian thực
-**[`YOLOv8n-FireDetection`](https://github.com/17tuanphamanh/YOLOv8n-FireDetection)**
-
-Nhận diện lửa và khói từ camera IP bằng YOLOv8n, dashboard Tkinter toàn màn hình, cảnh báo Telegram
-kèm ảnh có bounding box. Luồng nhận diện chạy thread riêng tách khỏi luồng giao diện để UI không đứng hình.
-Cảnh báo bắn theo **chuyển trạng thái** An toàn → Nguy hiểm chứ không bắn mỗi khung hình, cộng cooldown 20 giây.
-
-`Python` · `Ultralytics YOLOv8` · `OpenCV` · `Tkinter` · `Telegram Bot API` · `threading`
-
-### Dự đoán giá nhà — Kaggle
-**[`House-Price-Prediction-using-Linear-Regression`](https://github.com/17tuanphamanh/House-Price-Prediction-using-Linear-Regression)**
-
-*House Prices – Advanced Regression Techniques*, 80+ feature. Đi từ Linear Regression làm baseline
-(CV RMSE ~36.000) rồi so sánh Ridge, Lasso, Random Forest, XGBoost. Tuning bằng `GridSearchCV`,
-pipeline sklearn dựng theo module.
-
----
-
-## ☕ Backend Java
-
-### Hệ thống đặt món trước & POS
-**[`swp301-block`](https://github.com/17tuanphamanh/swp301-block)**
-
-`Java 17` · `Servlet 4` · `JSTL` · `SQL Server (JDBC thuần)` · `Tomcat 9` · `Maven` · `HikariCP` · `bcrypt` · `ZXing`
-
-**Cố ý không dùng framework** — controller, DAO và view viết tay hết để nắm chắc MVC ba tầng vận hành thế nào.
-
-Điểm nghiệp vụ đáng nói: đơn đặt trước *không* xuống bếp ngay khi thanh toán. Hệ thống giữ đơn lại,
-chỉ đẩy xuống bếp **trước giờ khách hẹn đúng 20 phút** — đủ để món vừa xong khi khách tới, không sớm tới mức nguội.
-Có xử lý thanh toán trùng (idempotency) và 4 vai trò: khách, thu ngân, bếp, quản trị.
-
----
-
-## 🛠 Công nghệ
-
-| | |
-|---|---|
-| **Ngôn ngữ** | Python · TypeScript · Java · SQL |
-| **Frontend** | Next.js 14 · React · Tailwind CSS · Zustand |
-| **Backend** | FastAPI · SQLAlchemy · Alembic · Java Servlet · JWT |
-| **Cơ sở dữ liệu** | PostgreSQL · SQL Server |
-| **ML / DL** | scikit-learn · XGBoost · SHAP · Ultralytics YOLO · OpenCV · pandas · NumPy |
-| **DevOps** | Docker · GitHub Actions · Vercel · Render · Alembic migration |
+<br>
 
 ---
 
 <div align="center">
 
-### 📬 Liên hệ
+# 🧠 LLM Engineering — chạy production
 
-Đang tìm vị trí **Full-stack Developer**, **AI/ML Engineer** hoặc **Backend Developer**
+</div>
 
-📍 Hà Nội &nbsp;·&nbsp; 📧 **[phamtuana160324@gmail.com](mailto:phamtuana160324@gmail.com)** &nbsp;·&nbsp; 🌐 **[www.voca.io.vn](https://www.voca.io.vn)**
+Trong VOCA, tôi tự viết module **`ai_core`** làm tầng trung gian giữa sản phẩm và các nhà cung cấp LLM.
+Đây là phần tôi tâm đắc nhất, vì nó giải quyết đúng những vấn đề chỉ lộ ra khi hệ thống chạy thật.
+
+```mermaid
+flowchart LR
+    A["9 AI chains<br/>(tư vấn, gợi ý ngành,<br/>lộ trình, ghép mentor…)"] --> B{"routing.py<br/>phân tier tác vụ"}
+    B -->|cheap| C["DeepSeek<br/>khối lượng lớn"]
+    B -->|strong| D["Anthropic Opus<br/>suy luận quan trọng"]
+    C --> E["resolve_key()<br/>tự lùi sang key khác<br/>nếu chưa cấu hình"]
+    D --> E
+    E --> F["dispatch_json()<br/>output ràng buộc<br/>theo JSON schema"]
+    F -->|thành công| G["Ghi tokens_in / tokens_out<br/>→ pricing.py tính cost USD"]
+    F -->|thất bại| H["classify_error()<br/>8 loại lỗi"]
+    H --> I["Nói rõ vì sao fallback<br/>thay vì im lặng chạy mock"]
+```
+
+### Bốn vấn đề thật và cách tôi xử lý
+
+<table>
+<tr>
+<td width="30%"><b>💸 Chi phí LLM<br>không kiểm soát được</b></td>
+<td>
+<code>routing.py</code> chia tác vụ theo <b>tier</b>: việc khối lượng lớn, ít rủi ro (chẩn đoán nhanh,
+chat theo dõi, diễn giải kết quả) đi <b>DeepSeek</b>; việc quan trọng, mỗi phiên chỉ chạy một lần
+(lời khuyên cuối, tường thuật ma trận năng lực) mới dùng <b>Anthropic Opus</b>.
+Đây là <i>soft preference</i> — thiếu key thì tự lùi xuống key khác rồi tới key môi trường,
+nên deployment cấu hình dở dang vẫn chạy được.
+</td>
+</tr>
+<tr>
+<td><b>📉 Không biết mỗi<br>request tốn bao nhiêu</b></td>
+<td>
+<code>pricing.py</code> giữ bảng giá USD/1.000 token cho <b>13 model</b> của 4 nhà cung cấp,
+mỗi lời gọi đều ghi lại <code>tokens_in</code>, <code>tokens_out</code> và cost.
+Model lạ không nằm trong bảng thì <b>lùi về mức giá thận trọng</b> chứ không ghi cost bằng 0 —
+tôi không muốn hoá đơn bất ngờ vì một model chưa kịp cập nhật giá.
+</td>
+</tr>
+<tr>
+<td><b>🕳 Fallback im lặng —<br>lỗi khó chịu nhất</b></td>
+<td>
+Trước đây gọi model hỏng là hệ thống lặng lẽ trả về dữ liệu mock. Người dùng cắm API key xong
+vẫn thấy kết quả demo mà <b>không hiểu tại sao</b>. Giờ <code>classify_error()</code> phân loại thành
+8 nhóm — <code>sdk_missing</code> · <code>auth</code> · <code>quota</code> · <code>rate_limit</code> ·
+<code>bad_model</code> · <code>bad_request</code> · <code>parse</code> · <code>network</code> —
+và trả lý do lên tận giao diện.
+</td>
+</tr>
+<tr>
+<td><b>🔓 Output tự do<br>làm vỡ backend</b></td>
+<td>
+Mọi lời gọi đều đi qua <code>dispatch_json()</code> với <b>output ràng buộc theo JSON schema</b>,
+nên tầng dưới luôn nhận đúng cấu trúc đã định. Kèm theo là <b>quota theo từng key theo ngày</b>
+và bảng ghi nhận usage cùng loại lỗi, để theo dõi sức khoẻ hệ thống.
+</td>
+</tr>
+</table>
+
+### Chín AI chain đang phục vụ người dùng
+
+`career_recommender` · `school_recommender` · `roadmap_generator` · `profile_analyzer` ·
+`expert_matcher` · `expert_review` · `consultation` · `advisor` · `base`
+
+Prompt tách riêng khỏi logic chain (`ai_core/prompts/`), nên sửa prompt không phải đụng vào code xử lý.
+
+<br>
+
+<div align="center">
+  <a href="https://www.voca.io.vn">
+    <img src="assets/voca-preview.png" alt="Giao diện VOCA" width="86%">
+  </a>
+
+### Sản phẩm: → **[www.voca.io.vn](https://www.voca.io.vn)** ←
+
+</div>
+
+Nền tảng hướng nghiệp cho học sinh THPT và sinh viên: trắc nghiệm đánh giá năng lực, trợ lý AI,
+gợi ý trường - ngành và đặt lịch tư vấn với mentor. Tên miền riêng, Google Analytics, đầy đủ điều
+khoản sử dụng - chính sách bảo mật - chính sách hoàn tiền.
+
+<table>
+<tr><td width="22%"><b>AI</b></td><td>Anthropic · OpenAI · Google Gemini · DeepSeek — dispatch đa nhà cung cấp, structured output</td></tr>
+<tr><td><b>Backend</b></td><td>FastAPI · PostgreSQL · SQLAlchemy · Alembic · JWT (kèm <code>token_version</code> để thu hồi token)</td></tr>
+<tr><td><b>Frontend</b></td><td>Next.js 14 App Router · TypeScript · Zustand · Tailwind CSS</td></tr>
+<tr><td><b>Hạ tầng</b></td><td>Docker · docker-compose · Render · Vercel · 3 workflow GitHub Actions</td></tr>
+<tr><td><b>Quy mô</b></td><td><b>824 file</b> — 317 backend · 378 frontend · <b>78 migration Alembic</b></td></tr>
+</table>
+
+> 🔒 Repo để private. Cần xem code khi phỏng vấn, tôi mở quyền truy cập ngay — cứ email cho tôi.
+
+<br>
+
+---
+
+<div align="center">
+
+# 📊 Machine Learning & Data Science
+
+</div>
+
+### Explainable ML — Dự đoán khách hàng rời bỏ
+
+<a href="https://github.com/17tuanphamanh/churn-explainable-ml"><img src="https://img.shields.io/badge/churn--explainable--ml-181717?style=flat-square&logo=github&logoColor=white"></a>
+<a href="https://github.com/17tuanphamanh/Churn_Data_Processing"><img src="https://img.shields.io/badge/Churn__Data__Processing-181717?style=flat-square&logo=github&logoColor=white"></a>
+
+Dự đoán churn trên **10.000 hồ sơ khách hàng ngân hàng** (churn rate 20,37%), rồi dùng **SHAP** để
+giải thích mô hình dựa vào đâu mà quyết định. Đích đến là **playbook giữ chân theo từng phân khúc** —
+mô hình phải nói được *nên làm gì*, chứ không chỉ đưa ra một con số.
+
+<table>
+<tr><td width="34%">Mô hình tốt nhất</td><td>HistGradientBoosting + <code>class_weight</code></td></tr>
+<tr><td>Test PR-AUC / ROC-AUC</td><td><b>0,674 / 0,846</b></td></tr>
+<tr><td>Ngưỡng chọn theo recall ≥ 0,70</td><td>0,475 → Recall <b>0,690</b> · Precision 0,513 · F1 0,589</td></tr>
+<tr><td>Yếu tố chi phối (SHAP)</td><td>Age &gt; NumOfProducts &gt; Geography</td></tr>
+</table>
+
+**Ba điều tôi làm kỹ và sẽ bảo vệ được khi phỏng vấn:**
+
+- **Chọn ngưỡng theo mục tiêu nghiệp vụ, không lấy mặc định 0,5.** Bài toán giữ chân thì bỏ sót khách
+  sắp rời tốn kém hơn gọi nhầm một khách vẫn đang ở lại, nên tôi đặt ràng buộc recall ≥ 0,70 rồi mới
+  dò ra ngưỡng 0,475 — chấp nhận precision 0,513.
+- **Chống rò rỉ dữ liệu.** Preprocessor chỉ `fit` trên tập train rồi mới `transform` cho val/test.
+  Split stratified 70/15/15, `random_state=42`, chạy lại ra đúng con số cũ.
+- **Giữ lại kết quả âm tính.** SMOTE *không* cải thiện so với `class_weight` ở mức mất cân bằng này.
+  Tôi ghi thẳng vào báo cáo thay vì lược đi cho đẹp — biết một kỹ thuật *không* hiệu quả ở đâu cũng là kết quả.
+
+<br>
+
+### Computer Vision — Phát hiện cháy thời gian thực
+
+<a href="https://github.com/17tuanphamanh/YOLOv8n-FireDetection"><img src="https://img.shields.io/badge/YOLOv8n--FireDetection-181717?style=flat-square&logo=github&logoColor=white"></a>
+
+Nhận diện lửa và khói từ camera IP bằng **YOLOv8n**, dashboard Tkinter toàn màn hình, cảnh báo Telegram
+kèm ảnh có bounding box. Ba quyết định thiết kế xuất phát từ chuyện chạy thật:
+
+- **Cảnh báo theo chuyển trạng thái, không theo khung hình.** Bắn mỗi khung thì một đám cháy 10 giây
+  tạo ra hàng trăm tin nhắn. Chỉ gửi khi trạng thái chuyển `An toàn → Nguy hiểm`, cộng cooldown 20 giây.
+- **Inference chạy thread riêng** tách khỏi luồng giao diện, nên UI không đứng hình mỗi lần model xử lý.
+- **Ngưỡng `conf=0.7` đặt cao có chủ đích** — đổi một chút recall lấy việc giảm mạnh báo động giả,
+  vì lửa thật xuất hiện liên tục qua nhiều khung chứ không chỉ một.
+
+<br>
+
+### Regression — Dự đoán giá nhà (Kaggle)
+
+<a href="https://github.com/17tuanphamanh/House-Price-Prediction-using-Linear-Regression"><img src="https://img.shields.io/badge/House--Price--Prediction-181717?style=flat-square&logo=github&logoColor=white"></a>
+
+*House Prices – Advanced Regression Techniques*, 80+ feature. Đi từ Linear Regression làm baseline
+(CV RMSE ~36.000) rồi so sánh Ridge, Lasso, Random Forest và XGBoost. Tuning bằng `GridSearchCV`,
+pipeline sklearn dựng theo module.
+
+<br>
+
+---
+
+<div align="center">
+
+# 🗄 Data Engineering
+
+</div>
+
+Phần ít được khoe nhưng chiếm nhiều thời gian nhất trong cả hai mảng trên:
+
+<table>
+<tr>
+<td width="34%"><b>Pipeline dữ liệu reproducible</b></td>
+<td>
+Quy trình 8 bước từ raw snapshot → schema validation → khử trùng lặp → làm sạch → chọn feature →
+feature engineering → stratified split → xuất dữ liệu. <b>17 feature từ 14 cột gốc</b>,
+<code>random_state=42</code>, chạy lại cho ra đúng kết quả cũ.
+</td>
+</tr>
+<tr>
+<td><b>Thiết kế & tiến hoá schema</b></td>
+<td>
+<b>78 migration Alembic</b> trên PostgreSQL cho một sản phẩm đang chạy — thêm bảng, đổi tên,
+gộp nhiều head, đổi khoá ngoại sang <code>SET NULL</code>, gỡ bảng đã bỏ. Đây là kinh nghiệm
+sửa cơ sở dữ liệu <i>khi đã có dữ liệu thật bên trong</i>, khác hẳn dựng schema từ số 0.
+</td>
+</tr>
+<tr>
+<td><b>Analytics & observability</b></td>
+<td>
+Bảng analytics tổng hợp theo ngày, audit schema ghi vết thao tác, theo dõi usage và
+phân loại lỗi của từng lời gọi AI, quota theo key theo ngày.
+</td>
+</tr>
+</table>
+
+<br>
+
+---
+
+<div align="center">
+
+# ⚙️ Ngoài AI — Backend
+
+</div>
+
+### Hệ thống đặt món trước & POS
+
+<a href="https://github.com/17tuanphamanh/swp301-block"><img src="https://img.shields.io/badge/swp301--block-181717?style=flat-square&logo=github&logoColor=white"></a>
+
+`Java 17` · `Servlet 4` · `JSTL` · `SQL Server (JDBC thuần)` · `Tomcat 9` · `Maven` · `HikariCP` · `bcrypt` · `ZXing`
+
+**Cố ý không dùng framework** — controller, DAO và view viết tay hết, để nắm chắc MVC ba tầng vận hành thế nào.
+
+Điểm nghiệp vụ đáng nói: đơn đặt trước *không* xuống bếp ngay khi thanh toán. Hệ thống giữ đơn lại và
+chỉ đẩy xuống bếp **trước giờ khách hẹn đúng 20 phút** — đủ để món vừa xong khi khách tới, không sớm
+tới mức nguội. Có xử lý thanh toán trùng (idempotency) và 4 vai trò: khách, thu ngân, bếp, quản trị.
+
+<br>
+
+---
+
+<div align="center">
+
+# 🛠 Công nghệ
+
+<img src="https://skillicons.dev/icons?i=python,fastapi,postgres,docker,githubactions,ts,nextjs,react,tailwind,java,git,vercel&theme=dark" alt="Tech stack">
+
+</div>
+
+<table>
+<tr><td width="24%"><b>AI / LLM</b></td><td>Anthropic Claude · OpenAI · Google Gemini · DeepSeek · structured output (JSON schema) · prompt engineering · định tuyến & kiểm soát chi phí token</td></tr>
+<tr><td><b>ML / DL</b></td><td>scikit-learn · XGBoost · SHAP · Ultralytics YOLOv8 · OpenCV · pandas · NumPy</td></tr>
+<tr><td><b>Dữ liệu</b></td><td>PostgreSQL · SQL Server · SQLAlchemy · Alembic · pipeline chống leakage · feature engineering</td></tr>
+<tr><td><b>Backend</b></td><td>FastAPI · Python · Java Servlet · JWT · thiết kế REST API</td></tr>
+<tr><td><b>Frontend</b></td><td>Next.js 14 · React · TypeScript · Tailwind CSS · Zustand</td></tr>
+<tr><td><b>DevOps</b></td><td>Docker · docker-compose · GitHub Actions · Vercel · Render</td></tr>
+</table>
+
+<br>
+
+---
+
+<div align="center">
+
+## 📬 Liên hệ
+
+### Đang tìm vị trí **AI Engineer · Machine Learning Engineer · Data Scientist**
+
+<a href="mailto:phamtuana160324@gmail.com">
+  <img src="https://img.shields.io/badge/Gmail-phamtuana160324@gmail.com-EA4335?style=for-the-badge&logo=gmail&logoColor=white&labelColor=0B1120">
+</a>
+<a href="https://www.voca.io.vn">
+  <img src="https://img.shields.io/badge/Website-voca.io.vn-2563EB?style=for-the-badge&logo=googlechrome&logoColor=white&labelColor=0B1120">
+</a>
+
+📍 Hà Nội, Việt Nam
 
 </div>
