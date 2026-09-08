@@ -41,8 +41,15 @@ và ngành học, đặt lịch tư vấn với mentor. Hệ thống vận hành
 ### Tầng `ai_core`
 
 `ai_core` là tầng trung gian giữa sản phẩm và các nhà cung cấp LLM, do tôi tự thiết kế và xây dựng.
+Mỗi lời gọi đi qua năm bước:
 
-<img src="assets/ai-core.png" alt="Kiến trúc ai_core" width="100%">
+| Bước | Thành phần | Việc |
+|---|---|---|
+| 1 | 9 AI chain | Tầng nghiệp vụ gọi xuống |
+| 2 | `routing.py` | Phân **tier** theo mức độ quan trọng: `cheap` → DeepSeek cho việc khối lượng lớn, `strong` → Anthropic Opus cho việc mỗi phiên chỉ chạy một lần |
+| 3 | `resolve_key()` | Thiếu key của provider ưu tiên thì lùi sang key đang hoạt động, rồi tới key môi trường — deployment cấu hình dở dang vẫn chạy |
+| 4 | `dispatch_json()` | Gọi model với **output ràng buộc theo JSON schema**, tầng dưới luôn nhận đúng cấu trúc |
+| 5 | `pricing.py` / `classify_error()` | Thành công thì ghi `tokens_in`, `tokens_out` và cost USD vào sổ cái. Thất bại thì phân loại thành 8 nhóm lỗi và trả lý do lên giao diện quản trị |
 
 Bốn vấn đề chỉ lộ ra khi hệ thống chạy thật, và cách tôi xử lý:
 
@@ -61,7 +68,16 @@ Chín chain đang phục vụ người dùng: `career_recommender` · `school_re
 Chain `advisor` không chỉ sinh văn bản. Model tự xác định cần tra cứu dữ liệu nào, gọi tool tương ứng,
 đọc kết quả trả về, rồi lặp lại cho tới khi đủ thông tin để trả lời.
 
-<img src="assets/ai-agent.png" alt="Agent loop" width="100%">
+| Bước | Việc |
+|---|---|
+| 1 | Nhận tin nhắn mới cùng lịch sử hội thoại nhiều lượt |
+| 2 | Gọi model kèm khai báo **6 tool**, đồng thời stream chữ ra cho người dùng đọc ngay |
+| 3 | Nếu model trả về khối `tool_use` → `execute_tool()` truy vấn PostgreSQL → trả `tool_result` → **quay lại bước 2** |
+| 4 | Vòng lặp chặn cứng ở `MAX_TOOL_ITERS = 5` |
+| 5 | Khi không còn `tool_use` → trả lời cuối, đã neo vào dữ liệu thật |
+
+Sáu tool: `search_occupations` · `search_majors` · `search_schools` · `web_search` ·
+`get_my_profile` · `get_my_recommendations`
 
 - **Stream và tool use chạy đồng thời.** Nội dung được đẩy tới người dùng *ngay trong lúc* model vẫn đang cân nhắc gọi tool. Nếu đợi agent hoàn tất toàn bộ mới trả kết quả, người dùng phải chờ nhiều giây trước một màn hình trống.
 - **Vòng lặp có trần cứng.** `MAX_TOOL_ITERS = 5`. Một vòng lặp không giới hạn có thể lặp vô hạn và tiêu hết ngân sách token.
