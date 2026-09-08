@@ -9,11 +9,13 @@
 
 <br><br>
 
-### AI Engineer — xây dựng và vận hành sản phẩm AI trên môi trường thật
+### Sinh viên năm cuối ngành **Trí tuệ nhân tạo — Khoa học dữ liệu**, Đại học FPT · 2022 – 2026
 
-Phần khó của AI trong sản phẩm không nằm ở lời gọi model, mà ở tầng bao quanh nó:<br>
-định tuyến theo chi phí, ràng buộc định dạng đầu ra, xử lý khi nhà cung cấp gặp sự cố,<br>
-và đo được chi phí của từng yêu cầu.
+Tôi xây dựng và vận hành sản phẩm AI trên môi trường thật. Phần khó của AI trong sản phẩm không nằm<br>
+ở lời gọi model, mà ở tầng bao quanh nó: định tuyến theo chi phí, ràng buộc định dạng đầu ra,<br>
+xử lý khi nhà cung cấp gặp sự cố, và đo được chi phí của từng yêu cầu.
+
+**Đang tìm vị trí thực tập hoặc toàn thời gian — có thể bắt đầu ngay**
 
 <br>
 
@@ -94,6 +96,13 @@ Chain `advisor` không chỉ sinh văn bản. Model tự xác định cần tra 
 - **Chống rò rỉ dữ liệu.** Preprocessor chỉ `fit` trên train rồi mới `transform` cho val/test; pipeline 8 bước, stratified 70/15/15, `random_state=42`, chạy lại ra đúng số cũ.
 - **Giữ lại kết quả âm tính.** SMOTE *không* cải thiện kết quả so với `class_weight` ở mức mất cân bằng này. Tôi giữ nguyên phát hiện đó trong báo cáo thay vì lược bỏ, vì biết một kỹ thuật không hiệu quả ở đâu cũng là một kết luận có giá trị.
 
+### NLP — nhận diện cảm xúc trong văn bản
+
+Ứng dụng web phân tích cảm xúc của một đoạn văn bản tiếng Anh bằng **Watson NLP**, trả về điểm số cho
+năm cảm xúc và xác định cảm xúc trội nhất. Backend Flask, có tầng xử lý lỗi cho đầu vào rỗng hoặc không
+hợp lệ, kèm unit test cho hàm phân tích. Đồ án cuối khoá *Developing AI Applications with Python and Flask*
+(IBM trên Coursera).
+
 ### Computer Vision — phát hiện cháy thời gian thực
 
 <a href="https://github.com/17tuanphamanh/YOLOv8n-FireDetection"><img src="https://img.shields.io/badge/YOLOv8n--FireDetection-181717?style=flat-square&logo=github&logoColor=white"></a>
@@ -136,7 +145,9 @@ Random Forest, XGBoost; tuning bằng `GridSearchCV`.
 
 ## 📬 Liên hệ
 
-### Đang tìm vị trí **AI Engineer · Machine Learning Engineer · Data Scientist**
+### Thực tập sinh / Fresher — **AI Engineer · Machine Learning · Data Science**
+
+Có thể bắt đầu ngay, nhận cả thực tập và toàn thời gian.
 
 <a href="mailto:phamtuana160324@gmail.com"><img src="https://img.shields.io/badge/Gmail-phamtuana160324@gmail.com-EA4335?style=for-the-badge&logo=gmail&logoColor=white&labelColor=0B1120"></a>
 <a href="https://www.voca.io.vn"><img src="https://img.shields.io/badge/Website-voca.io.vn-2563EB?style=for-the-badge&logo=googlechrome&logoColor=white&labelColor=0B1120"></a>
