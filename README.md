@@ -1,93 +1,120 @@
-## Chào, tôi là Tuấn Anh 👋
+<div align="center">
 
-Sinh viên ở Hà Nội, đang đi theo hướng **AI Engineer — làm sản phẩm AI chạy thật**, không phải nghiên cứu.
+# Phạm Tuấn Anh
 
-Tôi đã làm vài dự án machine learning tương đối đầy đủ (bên dưới). Nhưng làm xong tôi nhận ra một điều:
-**tôi hiểu quy trình mà chưa hiểu bản chất.** Nên từ 23/08/2026 tôi quay lại học lại từ gốc — Python,
-giải tích, backpropagation viết tay — theo một lộ trình 126 ngày tự đặt ra. Trang này ghi lại cả hai:
-những gì đã làm, và những gì đang học.
+**Full-stack & Machine Learning Developer** · Hà Nội, Việt Nam
+
+Tôi xây sản phẩm chạy thật, có người dùng thật — không dừng ở notebook.
+
+[![Website](https://img.shields.io/badge/Sản_phẩm_đang_chạy-voca.io.vn-0A66C2?style=for-the-badge)](https://www.voca.io.vn)
+[![Email](https://img.shields.io/badge/Email-phamtuana160324@gmail.com-EA4335?style=for-the-badge&logo=gmail&logoColor=white)](mailto:phamtuana160324@gmail.com)
+
+</div>
 
 ---
 
-### Đang học
+## 🚀 VOCA — Nền tảng hướng nghiệp · **đang chạy production**
 
-**Lộ trình 126 ngày · 4 giờ/ngày · bắt đầu 23/08/2026**
+### 🔗 **[www.voca.io.vn](https://www.voca.io.vn)**
 
-| Giai đoạn | Nội dung |
+Nền tảng hướng nghiệp cho học sinh - sinh viên: đánh giá năng lực, gợi ý ngành học,
+đặt lịch tư vấn với mentor và xây lộ trình sự nghiệp. Tên miền riêng, có Google Analytics,
+có điều khoản - chính sách bảo mật - chính sách hoàn tiền. **Một sản phẩm hoàn chỉnh, không phải đồ án.**
+
+**Bốn mảng sản phẩm:** Hành trình Ikigai · Trợ lý hướng nghiệp AI · Sàn Mentor · Gói thành viên
+
+<table>
+<tr><td><b>Frontend</b></td><td>Next.js 14 (App Router) · TypeScript · Zustand · Tailwind CSS · dark mode · SSR</td></tr>
+<tr><td><b>Backend</b></td><td>FastAPI · PostgreSQL · SQLAlchemy · Alembic · JWT auth</td></tr>
+<tr><td><b>Hạ tầng</b></td><td>Docker · docker-compose · Render · Vercel · 3 workflow GitHub Actions (CI, keepalive, migrate DB)</td></tr>
+<tr><td><b>Quy mô</b></td><td><b>824 file</b> · 378 frontend · 317 backend · <b>78 migration Alembic</b></td></tr>
+</table>
+
+**Những bài toán khó tôi đã phải tự giải trong dự án này:**
+
+| Bài toán | Cách xử lý |
 |---|---|
-| Tuần 0 | Python từ số 0 |
-| Tuần 1–2 | Đại số tuyến tính, gradient descent, quy trình ML & overfitting |
-| Tuần 3–5 | Backpropagation dẫn xuất tay, MLP, CNN — **không dùng thư viện dựng sẵn** |
-| Tuần 6–10 | Tối ưu hoá, RNN, Transformer, attention, dựng GPT nhỏ từ đầu |
-| Tuần 11–14 | PyTorch, fine-tuning, LoRA, RAG |
-| Tuần 15–17 | LLM application: agent, evaluation, observability, triển khai |
+| 💳 **Thanh toán & chi trả** | Payment transaction, payout cho mentor, thông tin ngân hàng, luồng rút tiền, coupon |
+| ⚖️ **Tranh chấp booking** | Bảng dispute riêng, cho đính kèm bằng chứng, admin note, phạt huỷ lịch phía chuyên gia |
+| 🕐 **Lịch hẹn đa múi giờ** | Booking gắn timezone, buffer & time-off của mentor, group session giới hạn số người |
+| 🔐 **Xác thực & phân quyền** | JWT + `token_version` để thu hồi token, xác thực email, 4 vai trò (học viên / mentor / chuyên gia / admin) |
+| 📊 **Vận hành** | Audit schema, analytics theo ngày, hệ thống báo cáo nội dung, notification, chat |
 
-Quy tắc tôi tự đặt: **tuần 3, 4, 5, 9, 10, 12 cấm dùng thư viện dựng sẵn** cho bài chính.
-Backprop, attention, LoRA phải tự viết được bằng NumPy trước khi cho phép mình gọi `torch.nn`.
-
-> Tiến độ hiện tại: **Tuần 0** — đang học Python. Đo bằng số ngày đã tick, không đo bằng lịch.
+> Repo hiện để private. Cần xem code khi phỏng vấn, tôi sẵn sàng mở quyền truy cập — cứ email cho tôi.
 
 ---
 
-### Dự án
+## 🤖 Machine Learning
 
-#### Explainable ML cho dự đoán khách hàng rời bỏ
-[`churn-explainable-ml`](https://github.com/17tuanphamanh/churn-explainable-ml) · [`Churn_Data_Processing`](https://github.com/17tuanphamanh/Churn_Data_Processing)
+### Explainable ML — Dự đoán khách hàng rời bỏ
+**[`churn-explainable-ml`](https://github.com/17tuanphamanh/churn-explainable-ml)** · **[`Churn_Data_Processing`](https://github.com/17tuanphamanh/Churn_Data_Processing)**
 
-Dự đoán churn trên 10.000 khách hàng ngân hàng (churn rate 20,37%), rồi dùng SHAP để giải thích
-mô hình quyết định dựa trên cái gì — mục tiêu cuối là **thiết kế chiến lược giữ chân theo phân khúc**,
-không dừng ở con số accuracy.
+Dự đoán churn trên 10.000 hồ sơ khách hàng ngân hàng (churn rate 20,37%), rồi dùng SHAP để giải thích
+mô hình dựa vào đâu mà quyết định — mục tiêu cuối là **playbook giữ chân theo từng phân khúc**, không dừng ở accuracy.
 
-| | |
+| Chỉ số | Kết quả |
 |---|---|
 | Mô hình tốt nhất | HistGradientBoosting + `class_weight` |
 | Test PR-AUC / ROC-AUC | **0,674 / 0,846** |
-| Ngưỡng chọn theo recall ≥ 0,70 | 0,475 → Recall **0,690**, Precision 0,513, F1 0,589 |
+| Ngưỡng theo recall ≥ 0,70 | 0,475 → Recall **0,690** · Precision 0,513 · F1 0,589 |
 | Yếu tố chi phối (SHAP) | Age > NumOfProducts > Geography |
 
-Hai chi tiết tôi quan tâm nhất khi làm:
-- **Chống rò rỉ dữ liệu (leakage):** preprocessor chỉ `fit` trên tập train, rồi mới `transform` cho val/test. Tách stratified 70/15/15.
-- **SMOTE không phải lúc nào cũng tốt:** với mức mất cân bằng nhẹ này, SMOTE *không* cải thiện so với `class_weight`. Tôi giữ lại kết quả âm tính đó trong báo cáo thay vì giấu đi.
+Hai điểm tôi làm kỹ:
+- **Chống rò rỉ dữ liệu:** preprocessor chỉ `fit` trên train rồi mới `transform` cho val/test. Split stratified 70/15/15, `random_state=42`, chạy lại ra đúng số cũ.
+- **Giữ lại kết quả âm tính:** SMOTE *không* cải thiện so với `class_weight` ở mức mất cân bằng này. Tôi ghi thẳng vào báo cáo thay vì bỏ đi cho đẹp.
 
-#### Phát hiện cháy thời gian thực + cảnh báo Telegram
-[`YOLOv9-FireDetection`](https://github.com/17tuanphamanh/YOLOv9-FireDetection)
+### Phát hiện cháy thời gian thực
+**[`YOLOv8n-FireDetection`](https://github.com/17tuanphamanh/YOLOv8n-FireDetection)**
 
-Nhận diện lửa và khói theo thời gian thực bằng YOLOv8n, tự động gửi ảnh có bounding box
-kèm mốc thời gian về Telegram, lưu snapshot cục bộ. Python 3.8+.
+Nhận diện lửa và khói từ camera IP bằng YOLOv8n, dashboard Tkinter toàn màn hình, cảnh báo Telegram
+kèm ảnh có bounding box. Luồng nhận diện chạy thread riêng tách khỏi luồng giao diện để UI không đứng hình.
+Cảnh báo bắn theo **chuyển trạng thái** An toàn → Nguy hiểm chứ không bắn mỗi khung hình, cộng cooldown 20 giây.
 
-#### Dự đoán giá nhà — Kaggle
-[`House-Price-Prediction-using-Linear-Regression`](https://github.com/17tuanphamanh/House-Price-Prediction-using-Linear-Regression)
+`Python` · `Ultralytics YOLOv8` · `OpenCV` · `Tkinter` · `Telegram Bot API` · `threading`
 
-Bài toán *House Prices – Advanced Regression Techniques* với 80+ feature. Đi từ Linear Regression
-làm baseline (CV RMSE ~36.000) rồi so sánh Ridge, Lasso, Random Forest, XGBoost.
-Tuning bằng `GridSearchCV`, dựng pipeline sklearn theo module.
+### Dự đoán giá nhà — Kaggle
+**[`House-Price-Prediction-using-Linear-Regression`](https://github.com/17tuanphamanh/House-Price-Prediction-using-Linear-Regression)**
 
-#### Hệ thống đặt món trước & POS cho cửa hàng đồ ăn nhanh
-[`swp301-block`](https://github.com/17tuanphamanh/swp301-block) · Đồ án SWP301
+*House Prices – Advanced Regression Techniques*, 80+ feature. Đi từ Linear Regression làm baseline
+(CV RMSE ~36.000) rồi so sánh Ridge, Lasso, Random Forest, XGBoost. Tuning bằng `GridSearchCV`,
+pipeline sklearn dựng theo module.
 
-Java 17 · Servlet 4 · JSTL · SQL Server (JDBC thuần) · Tomcat 9 · Maven · HikariCP · bcrypt · ZXing
+---
 
-**Không dùng framework** — toàn bộ tầng controller, DAO và view viết tay để thấy rõ MVC ba tầng vận hành.
-Điểm nghiệp vụ thú vị: đơn đặt trước *không* xuống bếp ngay khi thanh toán. Hệ thống giữ đơn lại và
-chỉ đẩy xuống bếp **trước giờ khách hẹn 20 phút** — đủ để món vừa xong khi khách tới, không sớm tới mức nguội.
+## ☕ Backend Java
+
+### Hệ thống đặt món trước & POS
+**[`swp301-block`](https://github.com/17tuanphamanh/swp301-block)**
+
+`Java 17` · `Servlet 4` · `JSTL` · `SQL Server (JDBC thuần)` · `Tomcat 9` · `Maven` · `HikariCP` · `bcrypt` · `ZXing`
+
+**Cố ý không dùng framework** — controller, DAO và view viết tay hết để nắm chắc MVC ba tầng vận hành thế nào.
+
+Điểm nghiệp vụ đáng nói: đơn đặt trước *không* xuống bếp ngay khi thanh toán. Hệ thống giữ đơn lại,
+chỉ đẩy xuống bếp **trước giờ khách hẹn đúng 20 phút** — đủ để món vừa xong khi khách tới, không sớm tới mức nguội.
 Có xử lý thanh toán trùng (idempotency) và 4 vai trò: khách, thu ngân, bếp, quản trị.
 
 ---
 
-### Công cụ đang dùng
+## 🛠 Công nghệ
 
-**Ngôn ngữ** Python · Java · SQL
-**ML / DL** scikit-learn · XGBoost · SHAP · YOLO (Ultralytics) · pandas · NumPy
-**Khác** Jupyter · Git · SQL Server · Tomcat · Maven
-
-Máy làm việc: MacBook Apple M2 (không CUDA, chỉ MPS) — nên tôi phải để ý chuyện
-model chạy được ở đâu, chứ không mặc định có GPU.
+| | |
+|---|---|
+| **Ngôn ngữ** | Python · TypeScript · Java · SQL |
+| **Frontend** | Next.js 14 · React · Tailwind CSS · Zustand |
+| **Backend** | FastAPI · SQLAlchemy · Alembic · Java Servlet · JWT |
+| **Cơ sở dữ liệu** | PostgreSQL · SQL Server |
+| **ML / DL** | scikit-learn · XGBoost · SHAP · Ultralytics YOLO · OpenCV · pandas · NumPy |
+| **DevOps** | Docker · GitHub Actions · Vercel · Render · Alembic migration |
 
 ---
 
-### Liên hệ
+<div align="center">
 
-📍 Hà Nội · 📧 [phamtuana160324@gmail.com](mailto:phamtuana160324@gmail.com)
+### 📬 Liên hệ
 
-Đang tìm **thực tập / vị trí junior về AI Engineer, Machine Learning hoặc Data**.
-Nếu bạn thấy chỗ nào trong các dự án trên làm chưa đúng, mở issue giúp tôi — tôi đang học, và học từ chỗ sai là nhanh nhất.
+Đang tìm vị trí **Full-stack Developer**, **AI/ML Engineer** hoặc **Backend Developer**
+
+📍 Hà Nội &nbsp;·&nbsp; 📧 **[phamtuana160324@gmail.com](mailto:phamtuana160324@gmail.com)** &nbsp;·&nbsp; 🌐 **[www.voca.io.vn](https://www.voca.io.vn)**
+
+</div>
