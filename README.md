@@ -46,7 +46,12 @@ và ngành học, đặt lịch tư vấn với mentor. Hệ thống vận hành
 
 Bốn vấn đề chỉ lộ ra khi hệ thống chạy thật, và cách tôi xử lý:
 
-<img src="assets/panel-problems.png" alt="Bốn vấn đề và cách xử lý" width="100%">
+| Vấn đề | Cách xử lý |
+|---|---|
+| **Chi phí LLM không kiểm soát được** | Chia tác vụ theo **tier**: việc khối lượng lớn đi DeepSeek, việc quan trọng mỗi phiên chỉ chạy một lần mới dùng Anthropic Opus. Thiếu key thì tự lùi sang key khác nên deployment cấu hình dở dang vẫn chạy được. |
+| **Không biết mỗi request tốn bao nhiêu** | Bảng giá **13 model**. Mỗi lời gọi ghi tokens và cost vào sổ cái, tách theo người dùng · tính năng · model. Model lạ lùi về mức giá thận trọng, **không bao giờ ghi cost bằng 0**. |
+| **Fallback im lặng** | Gọi model hỏng mà lặng lẽ trả mock thì người dùng cắm API key xong vẫn thấy demo, không hiểu vì sao. Lỗi được phân thành **8 nhóm** — `sdk_missing` `auth` `quota` `rate_limit` `bad_model` `bad_request` `parse` `network` — và trả lý do lên giao diện quản trị. |
+| **Output tự do làm vỡ backend** | Mọi lời gọi ràng buộc theo **JSON schema** nên tầng dưới luôn nhận đúng cấu trúc. Kèm quota theo key theo ngày; prompt tách khỏi logic chain nên sửa prompt không phải đụng code. |
 
 Chín chain đang phục vụ người dùng: `career_recommender` · `school_recommender` · `roadmap_generator` ·
 `profile_analyzer` · `expert_matcher` · `expert_review` · `consultation` · `advisor` · `base`
@@ -64,7 +69,12 @@ Chain `advisor` không chỉ sinh văn bản. Model tự xác định cần tra 
 
 ### Vài chỗ khó khác trong hệ thống
 
-<img src="assets/panel-system.png" alt="WebSocket, thanh toán, lịch, giọng nói" width="100%">
+| | |
+|---|---|
+| **WebSocket scale ngang** | Khi chạy nhiều instance, người dùng nối vào instance B không nhận được tin sinh ra ở instance A. Tôi giải bằng **Redis pub/sub fan-out**: instance tạo tin *chỉ publish*, listener trên mọi instance mới lo phần gửi — nhờ vậy mỗi socket nhận **đúng một lần**. Tắt Redis thì tự lùi về quản lý trong bộ nhớ. |
+| **Cổng thanh toán SePay** | Thanh toán QR, **webhook xác thực bằng chữ ký HMAC** nên không ai giả được thông báo "đã thanh toán". Có chống giao dịch trùng, payout cho mentor và luồng hoàn tiền. |
+| **Google Calendar** | Đồng bộ lịch hẹn qua **OAuth2 + Calendar API v3, gọi REST trực tiếp bằng `httpx`**, không kéo thêm thư viện client. Thiếu credentials thì mọi lối vào thành no-op an toàn, nền tảng chạy y nguyên. |
+| **Hệ thống giọng nói** | Đọc câu trả lời và nhập liệu bằng giọng nói. Tầng STT thiết kế theo **provider cắm rời**: một provider dùng Web Speech API, một provider chạy **Whisper trên WebAssembly ngay trong trình duyệt**. |
 
 ---
 
@@ -118,7 +128,20 @@ Hệ thống đặt món trước và bán hàng tại quầy. Controller, DAO v
 
 ## Công nghệ
 
-<img src="assets/panel-stack.png" alt="Tech stack" width="100%">
+<div align="center">
+  <img src="https://skillicons.dev/icons?i=python,fastapi,postgres,redis,docker,githubactions,sklearn,opencv,ts,nextjs,react,tailwind,java,git,vercel&perline=8" alt="Tech stack">
+</div>
+
+| Nhóm | |
+|---|---|
+| **Ngôn ngữ** | Python · TypeScript · Java · SQL |
+| **AI / LLM** | Anthropic · OpenAI · Gemini · DeepSeek · function calling · structured output · streaming · prompt engineering · token & cost accounting |
+| **ML / Computer Vision** | scikit-learn · XGBoost · SHAP · YOLOv8 · OpenCV · pandas · NumPy |
+| **Backend** | FastAPI · SQLAlchemy async · Alembic · Redis · WebSocket · JWT · OAuth2 · Java Servlet |
+| **Cơ sở dữ liệu** | PostgreSQL · SQL Server |
+| **Frontend** | Next.js 14 · React · TypeScript · Tailwind CSS · Zustand |
+| **Kiểm thử** | Playwright · Vitest · React Testing Library · MSW |
+| **DevOps** | Docker · GitHub Actions · Vercel · Render · Sentry |
 
 ---
 
