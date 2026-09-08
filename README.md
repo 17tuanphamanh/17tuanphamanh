@@ -33,18 +33,9 @@ Việc khó của AI trong sản phẩm không nằm ở lúc gọi model, mà �
 Trong VOCA, tôi tự viết module **`ai_core`** làm tầng trung gian giữa sản phẩm và các nhà cung cấp LLM.
 Đây là phần tôi tâm đắc nhất, vì nó giải quyết đúng những vấn đề chỉ lộ ra khi hệ thống chạy thật.
 
-```mermaid
-flowchart TD
-    A["9 AI chain: tu van, goi y nganh, lo trinh, ghep mentor"] --> B{"routing.py - phan tier tac vu"}
-    B -->|"tier cheap"| C["DeepSeek - khoi luong lon, it rui ro"]
-    B -->|"tier strong"| D["Anthropic Opus - suy luan quan trong"]
-    C --> E["resolve_key - tu lui sang key khac neu thieu"]
-    D --> E
-    E --> F["dispatch_json - output rang buoc theo JSON schema"]
-    F -->|"thanh cong"| G["Ghi tokens_in / tokens_out, pricing.py tinh cost USD"]
-    F -->|"that bai"| H["classify_error - phan thanh 8 loai loi"]
-    H --> I["Bao ro ly do, thay vi im lang chay mock"]
-```
+<div align="center">
+  <img src="assets/ai-core.png" alt="Kiến trúc ai_core — routing theo tier, structured output, tính chi phí, phân loại lỗi" width="100%">
+</div>
 
 ### Bốn vấn đề thật và cách tôi xử lý
 
