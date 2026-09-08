@@ -9,10 +9,11 @@
 
 <br><br>
 
-### Tôi đưa mô hình vào sản phẩm chạy thật — không dừng lại ở notebook.
+### AI Engineer — xây dựng và vận hành sản phẩm AI trên môi trường thật
 
-Việc khó của AI trong sản phẩm không nằm ở lúc gọi model, mà ở những gì bao quanh nó:<br>
-định tuyến chi phí, ràng buộc output, xử lý khi provider hỏng, và đo xem mỗi request tốn bao nhiêu tiền.
+Phần khó của AI trong sản phẩm không nằm ở lời gọi model, mà ở tầng bao quanh nó:<br>
+định tuyến theo chi phí, ràng buộc định dạng đầu ra, xử lý khi nhà cung cấp gặp sự cố,<br>
+và đo được chi phí của từng yêu cầu.
 
 <br>
 
@@ -28,10 +29,9 @@ Việc khó của AI trong sản phẩm không nằm ở lúc gọi model, mà �
 
 </div>
 
-Trắc nghiệm đánh giá năng lực, trợ lý AI, gợi ý trường - ngành và đặt lịch tư vấn với mentor.
-Tên miền riêng, có thanh toán, có điều khoản và chính sách hoàn tiền.
+Sản phẩm gồm bốn nhóm tính năng: trắc nghiệm đánh giá năng lực, trợ lý AI hướng nghiệp, gợi ý trường và ngành học, đặt lịch tư vấn với mentor. Hệ thống vận hành trên tên miền riêng, có tích hợp thanh toán, điều khoản sử dụng và chính sách hoàn tiền.
 
-> 🔒 Repo private vì đang phục vụ người dùng thật. Cần xem code khi phỏng vấn, tôi mở quyền ngay — email cho tôi.
+> 🔒 Mã nguồn để ở chế độ riêng tư do sản phẩm đang phục vụ người dùng. Tôi sẵn sàng cấp quyền truy cập để đánh giá trong quá trình phỏng vấn — vui lòng liên hệ qua email.
 
 <br>
 
@@ -41,7 +41,7 @@ Tên miền riêng, có thanh toán, có điều khoản và chính sách hoàn 
 
 # 🧠 Generative AI
 
-Tôi tự viết `ai_core` — tầng trung gian giữa sản phẩm và các nhà cung cấp LLM.
+`ai_core` là tầng trung gian giữa sản phẩm và các nhà cung cấp LLM, do tôi tự thiết kế và xây dựng.
 
 <img src="assets/ai-core.png" alt="Kiến trúc ai_core" width="100%">
 
@@ -62,15 +62,15 @@ Tôi tự viết `ai_core` — tầng trung gian giữa sản phẩm và các nh
 
 # 🤖 AI Agent
 
-Chain `advisor` không chỉ sinh chữ — model tự quyết định cần tra dữ liệu gì, gọi tool, đọc kết quả, rồi vòng lại.
+Chain `advisor` không chỉ sinh văn bản. Model tự xác định cần tra cứu dữ liệu nào, gọi tool tương ứng, đọc kết quả trả về, rồi lặp lại cho tới khi đủ thông tin để trả lời.
 
 <img src="assets/ai-agent.png" alt="Agent loop" width="100%">
 
 </div>
 
-- **Stream và tool use chạy đồng thời.** Chữ đẩy ra cho người dùng đọc *ngay trong lúc* model còn đang cân nhắc gọi tool — chờ agent xong hết mới trả về thì người dùng nhìn màn hình trống mất nhiều giây.
-- **Vòng lặp có trần cứng.** `MAX_TOOL_ITERS = 5`; agent không giới hạn có thể quay vòng vô hạn và đốt sạch token.
-- **Neo câu trả lời vào dữ liệu thật.** Sáu tool đọc thẳng PostgreSQL, thêm một tool tìm web **bắt buộc trích nguồn** — chặn model bịa tên ngành hay bịa điểm chuẩn, vấn đề chí mạng của một sản phẩm tư vấn.
+- **Stream và tool use chạy đồng thời.** Nội dung được đẩy tới người dùng *ngay trong lúc* model vẫn đang cân nhắc gọi tool. Nếu đợi agent hoàn tất toàn bộ mới trả kết quả, người dùng phải chờ nhiều giây trước một màn hình trống.
+- **Vòng lặp có trần cứng.** `MAX_TOOL_ITERS = 5`. Một vòng lặp không giới hạn có thể lặp vô hạn và tiêu hết ngân sách token.
+- **Neo câu trả lời vào dữ liệu thật.** Sáu tool truy vấn trực tiếp PostgreSQL, kèm một tool tìm kiếm web **bắt buộc trích dẫn nguồn**. Đây là cơ chế ngăn model đưa ra tên ngành hoặc điểm chuẩn không có thật — rủi ro nghiêm trọng nhất của một sản phẩm tư vấn hướng nghiệp.
 
 <br>
 
@@ -90,9 +90,9 @@ Chain `advisor` không chỉ sinh chữ — model tự quyết định cần tra
 10.000 hồ sơ khách hàng ngân hàng, churn rate 20,37%. HistGradientBoosting + `class_weight` →
 **test PR-AUC 0,674 · ROC-AUC 0,846**. SHAP cho thấy Age > NumOfProducts > Geography.
 
-- **Chọn ngưỡng theo mục tiêu nghiệp vụ, không lấy mặc định 0,5.** Bỏ sót khách sắp rời tốn hơn gọi nhầm khách đang ở lại, nên đặt ràng buộc recall ≥ 0,70 rồi mới dò ra ngưỡng 0,475 → recall 0,690, precision 0,513.
+- **Chọn ngưỡng theo mục tiêu nghiệp vụ, không lấy mặc định 0,5.** Chi phí của việc bỏ sót một khách hàng sắp rời bỏ cao hơn chi phí liên hệ nhầm một khách hàng vẫn đang ở lại. Tôi đặt ràng buộc recall ≥ 0,70, từ đó xác định ngưỡng 0,475 cho recall 0,690 và precision 0,513.
 - **Chống rò rỉ dữ liệu.** Preprocessor chỉ `fit` trên train rồi mới `transform` cho val/test; pipeline 8 bước, stratified 70/15/15, `random_state=42`, chạy lại ra đúng số cũ.
-- **Giữ lại kết quả âm tính.** SMOTE *không* cải thiện so với `class_weight` ở mức mất cân bằng này — tôi ghi thẳng vào báo cáo thay vì lược đi cho đẹp.
+- **Giữ lại kết quả âm tính.** SMOTE *không* cải thiện kết quả so với `class_weight` ở mức mất cân bằng này. Tôi giữ nguyên phát hiện đó trong báo cáo thay vì lược bỏ, vì biết một kỹ thuật không hiệu quả ở đâu cũng là một kết luận có giá trị.
 
 ### Computer Vision — phát hiện cháy thời gian thực
 
@@ -100,8 +100,8 @@ Chain `advisor` không chỉ sinh chữ — model tự quyết định cần tra
 
 YOLOv8n trên camera IP, cảnh báo Telegram kèm ảnh có bounding box.
 
-- **Cảnh báo theo chuyển trạng thái, không theo khung hình** — bắn mỗi khung thì một đám cháy 10 giây tạo hàng trăm tin nhắn. Chỉ gửi khi `An toàn → Nguy hiểm`, cộng cooldown 20 giây.
-- **Ngưỡng `conf=0.7` đặt cao có chủ đích** — đổi chút recall lấy việc giảm mạnh báo động giả, vì lửa thật xuất hiện liên tục qua nhiều khung. Inference chạy thread riêng nên giao diện không đứng hình.
+- **Cảnh báo theo chuyển trạng thái, không theo khung hình** — nếu gửi cảnh báo ở mỗi khung hình, một đám cháy kéo dài 10 giây sẽ sinh ra hàng trăm thông báo. Hệ thống chỉ gửi khi trạng thái chuyển từ `An toàn` sang `Nguy hiểm`, kèm khoảng chờ 20 giây giữa hai cảnh báo.
+- **Ngưỡng `conf=0.7` đặt cao có chủ đích** — đánh đổi một phần recall để giảm đáng kể tỉ lệ báo động giả, vì đám cháy thật xuất hiện liên tục qua nhiều khung hình chứ không chỉ một. Quá trình inference chạy trên thread riêng nên giao diện không bị treo.
 
 ### Regression — dự đoán giá nhà
 
