@@ -88,6 +88,28 @@ Prompt tách riêng khỏi logic chain (`ai_core/prompts/`), nên sửa prompt k
 
 <br>
 
+### AI Advisor — agent tự gọi tool, vừa chạy vừa trả lời
+
+Chain `advisor` không chỉ sinh chữ. Nó là một **agent có công cụ**: model tự quyết định cần tra
+dữ liệu gì, gọi tool, đọc kết quả, rồi vòng lại cho tới khi đủ thông tin mới trả lời.
+
+<div align="center">
+  <img src="assets/ai-agent.png" alt="Agent loop — function calling, streaming, 6 tool, giới hạn 5 vòng lặp" width="100%">
+</div>
+
+Ba chỗ khó nằm ở đây:
+
+- **Stream và tool use chạy đồng thời.** Chữ được đẩy ra cho người dùng đọc *ngay trong lúc* model
+  vẫn đang cân nhắc gọi tool. Nếu chờ agent chạy xong hết mới trả về thì người dùng ngồi nhìn màn hình
+  trống mất nhiều giây.
+- **Vòng lặp có trần cứng.** `MAX_TOOL_ITERS = 5` — một agent không giới hạn có thể quay vòng
+  vô hạn và đốt sạch token.
+- **Neo câu trả lời vào dữ liệu thật.** Sáu tool đọc thẳng PostgreSQL (nghề, ngành, trường, điểm chuẩn,
+  hồ sơ người dùng) cộng một tool tìm web **bắt buộc trích nguồn**. Đây là cách chặn model bịa tên
+  ngành hay bịa điểm chuẩn — vấn đề chí mạng của một sản phẩm tư vấn hướng nghiệp.
+
+<br>
+
 <div align="center">
   <a href="https://www.voca.io.vn">
     <img src="assets/voca-preview.png" alt="Giao diện VOCA" width="86%">
@@ -246,20 +268,48 @@ tới mức nguội. Có xử lý thanh toán trùng (idempotency) và 4 vai tr�
 
 <table>
 <tr>
-  <td width="21%"><b>🧠 AI / LLM</b></td>
+  <td width="21%"><b>🧠 Generative AI (GenAI)</b></td>
   <td>
-  <code>anthropic</code> · <code>openai</code> · <code>google-generativeai</code> · DeepSeek —
-  dispatch đa nhà cung cấp · <b>structured output theo JSON schema</b> · prompt tách khỏi logic chain ·
-  định tuyến theo tier chi phí · đo <code>tokens_in</code>/<code>tokens_out</code> và quy ra cost USD ·
-  quota theo từng key theo ngày · phân loại lỗi 8 nhóm và suy giảm có kiểm soát khi provider hỏng
+  SDK <code>anthropic</code> · <code>openai</code> · <code>google-generativeai</code> · DeepSeek —
+  sinh nội dung tiếng Việt có kiểm soát · <b>structured output ràng buộc theo JSON schema</b> ·
+  <b>prompt engineering</b> với prompt tách thành module riêng · system prompt theo từng tác vụ ·
+  <b>streaming</b> phản hồi theo thời gian thực · trừu tượng hoá đa nhà cung cấp và chuyển đổi khi hỏng
   </td>
 </tr>
 <tr>
-  <td><b>📊 ML & Computer Vision</b></td>
+  <td><b>🤖 AI Agent & Tool Use</b></td>
   <td>
-  scikit-learn · XGBoost · <b>SHAP</b> · Ultralytics YOLOv8 · OpenCV · pandas · NumPy ·
-  SMOTE và <code>class_weight</code> cho dữ liệu mất cân bằng · <code>GridSearchCV</code> ·
-  chọn ngưỡng theo mục tiêu nghiệp vụ thay vì lấy mặc định 0,5
+  <b>Function calling</b> viết cho cả Anthropic lẫn OpenAI · vòng lặp agent có trần cứng
+  (<code>MAX_TOOL_ITERS = 5</code>) · <b>6 tool</b> truy vấn PostgreSQL thật cùng một tool tìm web
+  bắt buộc trích nguồn · <b>grounding</b> câu trả lời vào dữ liệu nội bộ để chặn bịa đặt ·
+  hội thoại nhiều lượt · chạy song song stream và tool use
+  </td>
+</tr>
+<tr>
+  <td><b>📈 LLM Ops</b></td>
+  <td>
+  Sổ cái <code>AIUsageLog</code> ghi từng lời gọi theo <b>người dùng · tính năng · provider · model</b> —
+  <code>tokens_in</code>, <code>tokens_out</code>, <code>cost_usd</code>, thành công hay thất bại, thật hay mock ·
+  bảng giá 13 model · định tuyến theo tier chi phí · quota theo key theo ngày ·
+  <b>phân loại lỗi 8 nhóm</b> · suy giảm có kiểm soát, luôn nói rõ vì sao rơi về mock
+  </td>
+</tr>
+<tr>
+  <td><b>👁 Computer Vision</b></td>
+  <td>
+  <b>Ultralytics YOLOv8</b> · <b>OpenCV</b> — nhận diện lửa và khói <b>thời gian thực</b> từ camera IP ·
+  inference chạy thread riêng tách khỏi giao diện · tinh chỉnh ngưỡng <code>conf</code>/<code>iou</code>
+  đánh đổi recall lấy việc giảm báo động giả · tính diện tích vùng cháy từ bounding box ·
+  cảnh báo theo chuyển trạng thái kèm cooldown
+  </td>
+</tr>
+<tr>
+  <td><b>📊 Machine Learning</b></td>
+  <td>
+  scikit-learn · XGBoost · <b>SHAP</b> (explainable AI) · pandas · NumPy ·
+  gradient boosting và ensemble · xử lý dữ liệu mất cân bằng bằng SMOTE và <code>class_weight</code> ·
+  <code>GridSearchCV</code> · <b>chọn ngưỡng theo mục tiêu nghiệp vụ</b> thay vì lấy mặc định 0,5 ·
+  đánh giá bằng PR-AUC / ROC-AUC / F1
   </td>
 </tr>
 <tr>
