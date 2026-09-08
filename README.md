@@ -240,18 +240,71 @@ tới mức nguội. Có xử lý thanh toán trùng (idempotency) và 4 vai tr�
 
 # 🛠 Công nghệ
 
-<img src="https://skillicons.dev/icons?i=python,fastapi,postgres,docker,githubactions,ts,nextjs,react,tailwind,java,git,vercel&theme=dark" alt="Tech stack">
+<img src="https://skillicons.dev/icons?i=python,fastapi,postgres,redis,docker,githubactions,sklearn,opencv,ts,nextjs,react,tailwind,java,git,vercel&perline=8&theme=dark" alt="Tech stack">
 
 </div>
 
 <table>
-<tr><td width="24%"><b>AI / LLM</b></td><td>Anthropic Claude · OpenAI · Google Gemini · DeepSeek · structured output (JSON schema) · prompt engineering · định tuyến & kiểm soát chi phí token</td></tr>
-<tr><td><b>ML / DL</b></td><td>scikit-learn · XGBoost · SHAP · Ultralytics YOLOv8 · OpenCV · pandas · NumPy</td></tr>
-<tr><td><b>Dữ liệu</b></td><td>PostgreSQL · SQL Server · SQLAlchemy · Alembic · pipeline chống leakage · feature engineering</td></tr>
-<tr><td><b>Backend</b></td><td>FastAPI · Python · Java Servlet · JWT · thiết kế REST API</td></tr>
-<tr><td><b>Frontend</b></td><td>Next.js 14 · React · TypeScript · Tailwind CSS · Zustand</td></tr>
-<tr><td><b>DevOps</b></td><td>Docker · docker-compose · GitHub Actions · Vercel · Render</td></tr>
+<tr>
+  <td width="21%"><b>🧠 AI / LLM</b></td>
+  <td>
+  <code>anthropic</code> · <code>openai</code> · <code>google-generativeai</code> · DeepSeek —
+  dispatch đa nhà cung cấp · <b>structured output theo JSON schema</b> · prompt tách khỏi logic chain ·
+  định tuyến theo tier chi phí · đo <code>tokens_in</code>/<code>tokens_out</code> và quy ra cost USD ·
+  quota theo từng key theo ngày · phân loại lỗi 8 nhóm và suy giảm có kiểm soát khi provider hỏng
+  </td>
+</tr>
+<tr>
+  <td><b>📊 ML & Computer Vision</b></td>
+  <td>
+  scikit-learn · XGBoost · <b>SHAP</b> · Ultralytics YOLOv8 · OpenCV · pandas · NumPy ·
+  SMOTE và <code>class_weight</code> cho dữ liệu mất cân bằng · <code>GridSearchCV</code> ·
+  chọn ngưỡng theo mục tiêu nghiệp vụ thay vì lấy mặc định 0,5
+  </td>
+</tr>
+<tr>
+  <td><b>🗄 Dữ liệu</b></td>
+  <td>
+  PostgreSQL · SQL Server · <b>SQLAlchemy</b> (async qua <code>asyncpg</code>) ·
+  <b>Alembic — 78 migration</b> trên sản phẩm đang chạy, gồm gộp nhiều head và đổi khoá ngoại sang <code>SET NULL</code> ·
+  Redis · pipeline chống rò rỉ dữ liệu · stratified split · feature engineering
+  </td>
+</tr>
+<tr>
+  <td><b>⚙️ Backend</b></td>
+  <td>
+  <b>FastAPI</b> · Python 3.12 · uvicorn + uvloop · Pydantic v2 và <code>pydantic-settings</code> ·
+  JWT qua <code>python-jose</code> kèm <code>token_version</code> để thu hồi token · bcrypt/passlib ·
+  <b>rate limiting bằng slowapi</b> · CORS và GZip middleware · scheduler chạy nền ·
+  xử lý riêng lỗi mất kết nối DB để vẫn trả về đúng CORS header · Java 17 Servlet + JSTL
+  </td>
+</tr>
+<tr>
+  <td><b>🎨 Frontend</b></td>
+  <td>
+  <b>Next.js 14 App Router</b> · React · TypeScript · Tailwind CSS · Zustand ·
+  Framer Motion · react-markdown · axios · dark mode theo <code>prefers-color-scheme</code>
+  </td>
+</tr>
+<tr>
+  <td><b>🧪 Kiểm thử</b></td>
+  <td>
+  <b>Playwright</b> (E2E) · <b>Vitest</b> · React Testing Library · <b>MSW</b> để mock tầng API ·
+  jsdom · <b>20 file test</b> phủ auth, ví, thanh toán, notification, admin và các hàm tiện ích
+  </td>
+</tr>
+<tr>
+  <td><b>🚀 DevOps & Observability</b></td>
+  <td>
+  Docker · docker-compose · Vercel · Render ·
+  <b>GitHub Actions</b> — frontend chạy typecheck → unit test → production build;
+  backend <b>dựng schema bằng đúng entrypoint deploy</b> rồi mới chạy test, nên CI xanh
+  đồng nghĩa với deploy chạy được · <b>Sentry</b> error tracking kèm performance tracing
+  </td>
+</tr>
 </table>
+
+> Mọi mục ở trên đều lấy từ code đang chạy, không phải từ danh sách "đã từng nghe qua".
 
 <br>
 
