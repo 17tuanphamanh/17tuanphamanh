@@ -1,15 +1,15 @@
 
       <svg
         width="466.2999949455262"
-        height="120"
-        viewBox="0 0 466.2999949455262 120"
+        height="170"
+        viewBox="0 0 466.2999949455262 170"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         role="img"
         aria-labelledby="descId"
       >
         <title id="titleId">Tu&#7845;n Anh Ph&#7841;m&#39;s GitHub Stats, Rank: C+</title>
-        <desc id="descId">Total Commits  : 749, Total PRs: 43</desc>
+        <desc id="descId">Total Commits  : 749, Total PRs: 43, Total PRs Merged: 39, Merged PRs Percentage: 90.70</desc>
         <style>
           .header {
             font: 600 18px 'Segoe UI', Ubuntu, Sans-Serif;
@@ -155,7 +155,7 @@
       <text class="stat  bold" x="25" y="12.5">Total Commits:</text>
       <text
         class="stat  bold"
-        x="174.01"
+        x="224.01"
         y="12.5"
         data-testid="commits"
       >749</text>
@@ -170,10 +170,40 @@
       <text class="stat  bold" x="25" y="12.5">Total PRs:</text>
       <text
         class="stat  bold"
-        x="174.01"
+        x="224.01"
         y="12.5"
         data-testid="prs"
       >43</text>
+    </g>
+  </g><g transform="translate(0, 50)">
+    <g class="stagger" style="animation-delay: 750ms" transform="translate(25, 0)">
+      
+    <svg data-testid="icon" class="icon" viewBox="0 0 16 16" version="1.1" width="16" height="16">
+      <path fill-rule="evenodd" d="M5.45 5.154A4.25 4.25 0 0 0 9.25 7.5h1.378a2.251 2.251 0 1 1 0 1.5H9.25A5.734 5.734 0 0 1 5 7.123v3.505a2.25 2.25 0 1 1-1.5 0V5.372a2.25 2.25 0 1 1 1.95-.218ZM4.25 13.5a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm8.5-4.5a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5ZM5 3.25a.75.75 0 1 0 0 .005V3.25Z" />
+    </svg>
+  
+      <text class="stat  bold" x="25" y="12.5">Total PRs Merged:</text>
+      <text
+        class="stat  bold"
+        x="224.01"
+        y="12.5"
+        data-testid="prs_merged"
+      >39</text>
+    </g>
+  </g><g transform="translate(0, 75)">
+    <g class="stagger" style="animation-delay: 900ms" transform="translate(25, 0)">
+      
+    <svg data-testid="icon" class="icon" viewBox="0 0 16 16" version="1.1" width="16" height="16">
+      <path fill-rule="evenodd" d="M13.442 2.558a.625.625 0 0 1 0 .884l-10 10a.625.625 0 1 1-.884-.884l10-10a.625.625 0 0 1 .884 0zM4.5 6a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm0 1a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5zm7 6a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm0 1a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z" />
+    </svg>
+  
+      <text class="stat  bold" x="25" y="12.5">Merged PRs Percentage:</text>
+      <text
+        class="stat  bold"
+        x="224.01"
+        y="12.5"
+        data-testid="prs_merged_percentage"
+      >90.70 %</text>
     </g>
   </g>
     </svg>
