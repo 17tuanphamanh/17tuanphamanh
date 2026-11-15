@@ -1,0 +1,174 @@
+{
+ "light": {
+  "buttons": [
+   "mailto:phamtuana160324@gmail.com",
+   "https://www.voca.io.vn/"
+  ],
+  "cards": [
+   "https://github.com/17tuanphamanh/churn-explainable-ml",
+   "https://github.com/17tuanphamanh/House-Price-Prediction-using-Linear-Regression",
+   "https://github.com/17tuanphamanh/YOLOv8n-FireDetection"
+  ],
+  "btn0": [
+   322,
+   112
+  ],
+  "btn1": [
+   440,
+   112
+  ],
+  "btnRepos": [
+   374,
+   112
+  ],
+  "caps": [
+   1904,
+   1812
+  ],
+  "voca": [
+   1904,
+   1082
+  ],
+  "aitha": [
+   1904,
+   806
+  ],
+  "more": [
+   1904,
+   274
+  ],
+  "card0": [
+   634,
+   612
+  ],
+  "card1": [
+   634,
+   612
+  ],
+  "card2": [
+   634,
+   612
+  ],
+  "footer": [
+   1904,
+   734
+  ]
+ },
+ "dark": {
+  "buttons": [
+   "mailto:phamtuana160324@gmail.com",
+   "https://www.voca.io.vn/"
+  ],
+  "cards": [
+   "https://github.com/17tuanphamanh/churn-explainable-ml",
+   "https://github.com/17tuanphamanh/House-Price-Prediction-using-Linear-Regression",
+   "https://github.com/17tuanphamanh/YOLOv8n-FireDetection"
+  ],
+  "btn0": [
+   322,
+   112
+  ],
+  "btn1": [
+   440,
+   112
+  ],
+  "btnRepos": [
+   374,
+   112
+  ],
+  "caps": [
+   1904,
+   1812
+  ],
+  "voca": [
+   1904,
+   1082
+  ],
+  "aitha": [
+   1904,
+   806
+  ],
+  "more": [
+   1904,
+   274
+  ],
+  "card0": [
+   634,
+   612
+  ],
+  "card1": [
+   634,
+   612
+  ],
+  "card2": [
+   634,
+   612
+  ],
+  "footer": [
+   1904,
+   734
+  ]
+ },
+ "light-m": {
+  "buttons": [
+   "mailto:phamtuana160324@gmail.com",
+   "https://www.voca.io.vn/"
+  ],
+  "cards": [
+   "https://github.com/17tuanphamanh/churn-explainable-ml",
+   "https://github.com/17tuanphamanh/House-Price-Prediction-using-Linear-Regression",
+   "https://github.com/17tuanphamanh/YOLOv8n-FireDetection"
+  ],
+  "caps": [
+   864,
+   3142
+  ],
+  "voca": [
+   864,
+   1570
+  ],
+  "aitha": [
+   864,
+   1316
+  ],
+  "more": [
+   864,
+   1884
+  ],
+  "footer": [
+   864,
+   706
+  ]
+ },
+ "dark-m": {
+  "buttons": [
+   "mailto:phamtuana160324@gmail.com",
+   "https://www.voca.io.vn/"
+  ],
+  "cards": [
+   "https://github.com/17tuanphamanh/churn-explainable-ml",
+   "https://github.com/17tuanphamanh/House-Price-Prediction-using-Linear-Regression",
+   "https://github.com/17tuanphamanh/YOLOv8n-FireDetection"
+  ],
+  "caps": [
+   864,
+   3142
+  ],
+  "voca": [
+   864,
+   1570
+  ],
+  "aitha": [
+   864,
+   1316
+  ],
+  "more": [
+   864,
+   1884
+  ],
+  "footer": [
+   864,
+   706
+  ]
+ }
+}

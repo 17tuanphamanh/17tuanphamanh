@@ -92,7 +92,7 @@ def demo():
     import random
     random.seed(7)
     weeks = [[(random.choice([0, 0, 1, 1, 2, 3, 4]), d) for d in range(7)] for _ in range(53)]
-    return dict(commits=920, prs=43, merged=39, weeks=weeks, langs=[("Python", 71), ("TypeScript", 14), ("Java", 11), ("Other", 4)], year=0)
+    return dict(commits=920, prs=43, merged=39, weeks=weeks, langs=[("Python", 71), ("TypeScript", 14), ("Java", 11), ("Other", 4)], year=971)
 
 
 # ---------------------------------------------------------------- drawing
@@ -124,8 +124,8 @@ def snake_path(cols):
 def render(data, theme):
     P = THEMES[theme]
     y = lambda v: v + TOP
-    rate = round(data["merged"] * 100 / data["prs"]) if data["prs"] else 0
-    stats = [(f'{data["commits"]:,}', "", "public commits"), (str(data["merged"]), "", "pull requests merged"), (str(rate), "%", "pull request merge rate")]
+    stats = [(f'{data["commits"]:,}', "", "public commits"), (str(data["merged"]), "", "pull requests merged"),
+             (f'{data["year"]:,}', "", "contributions in the last year")]
     s = []
     # header
     s.append(f'<text x="0" y="{y(11)}" class="k">ACTIVITY</text>')
@@ -189,17 +189,77 @@ def render(data, theme):
     shadow = (f'<filter id="sh" x="-5%" y="-5%" width="110%" height="120%"><feDropShadow dx="0" dy="12" stdDeviation="14" '
               f'flood-color="{P["shadow"][0]}" flood-opacity="{P["shadow"][1]}"/></filter>')
     label = (f'GitHub activity for {LOGIN}: {stats[0][0]} public commits, {stats[1][0]} pull requests merged, '
-             f'{rate}% merge rate, and the contribution calendar for the last year.')
+             f'{stats[2][0]} contributions in the last year, and the contribution calendar.')
     return (f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{height:.0f}" viewBox="0 0 {W} {height:.1f}" role="img" aria-label="{esc(label)}">'
+            f'<title>{esc(label)}</title><style>{css}</style><defs>{shadow}</defs>{"".join(s)}</svg>')
+
+
+def render_mobile(data, theme):
+    P = THEMES[theme]
+    w = 432
+    y = lambda v: v + TOP
+    s = []
+    s.append(f'<text x="0" y="{y(11)}" class="k">ACTIVITY</text>')
+    s.append(f'<text x="0" y="{y(46)}" class="t">GitHub activity</text>')
+    s.append(f'<text x="0" y="{y(72)}" class="p">Public contribution data, refreshed daily by a GitHub Action.</text>')
+    ct, ch = y(96), 370
+    s.append(f'<rect x="0.5" y="{ct + 0.5}" width="{w - 1}" height="{ch - 1}" rx="20" fill="{P["card"]}" stroke="{P["line"]}" '
+             f'stroke-opacity="{P["line_op"]}" filter="url(#sh)"/>')
+    stats = [(f'{data["commits"]:,}', ("public", "commits")), (str(data["merged"]), ("pull requests", "merged")),
+             (f'{data["year"]:,}', ("contributions", "last 12 months"))]
+    for i, (num, (l1, l2)) in enumerate(stats):
+        x = 22 + i * 130
+        d = 0.2 + i * 0.15
+        s.append(f'<g opacity="0" transform="translate(0 12)"><animate attributeName="opacity" values="0;1" dur="0.9s" begin="{d:.2f}s" fill="freeze"/>'
+                 f'<animateTransform attributeName="transform" type="translate" values="0 12;0 0" dur="0.9s" begin="{d:.2f}s" fill="freeze" '
+                 f'calcMode="spline" keyTimes="0;1" keySplines=".2 .7 .2 1"/>'
+                 f'<text x="{x}" y="{ct + 58}" class="nm">{esc(num)}</text>'
+                 f'<text x="{x}" y="{ct + 80}" class="lm">{esc(l1)}</text><text x="{x}" y="{ct + 95}" class="lm">{esc(l2)}</text></g>')
+    for i, (name, pct) in enumerate(data["langs"][:4]):
+        yy = ct + 128 + i * 22
+        col = P["langs"].get(name, P["langs"]["Other"])
+        bw = max(8, 254 * pct / 100)
+        s.append(f'<text x="22" y="{yy + 4.5}" class="b">{esc(name)}</text>')
+        s.append(f'<rect x="108" y="{yy - 4}" width="254" height="8" rx="4" fill="{P["track"]}"/>')
+        s.append(f'<rect x="108" y="{yy - 4}" width="0" height="8" rx="4" fill="{col}"><animate attributeName="width" values="0;{bw:.1f}" '
+                 f'dur="1.8s" begin="{0.4 + i * 0.15:.2f}s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines=".2 .7 .2 1"/></rect>')
+        s.append(f'<text x="410" y="{yy + 4.5}" class="b3" text-anchor="end">{pct}%</text>')
+    s.append(f'<line x1="22" x2="410" y1="{ct + 212.5}" y2="{ct + 212.5}" stroke="{P["line"]}" stroke-opacity="{P["line_op"]}"/>')
+    weeks = data["weeks"][-23:]
+    cols = len(weeks)
+    gw = cols * PITCH - GAP
+    gx, gy = (w - gw) / 2, ct + 232
+    cells = [f'<rect x="{wi * PITCH}" y="{day * PITCH}" width="{CELL}" height="{CELL}" rx="3" fill="{P["ramp"][level]}"/>'
+             for wi, week in enumerate(weeks) for level, day in week]
+    path = snake_path(cols)
+    segs = [f'<rect x="-6" y="-6" width="12" height="12" rx="4" fill="{P["head"] if i == 0 else P["snake"]}" opacity="{1 - i * 0.07:.2f}">'
+            f'<animateMotion dur="14s" repeatCount="indefinite" begin="{-((9 - i) * 0.09 + 2):.2f}s" path="{path}"/></rect>' for i in range(9)]
+    s.append(f'<g transform="translate({gx:.2f} {gy:.2f})">{"".join(cells)}{"".join(segs)}</g>')
+    height = ct + ch + 48
+    css = (font_face() +
+           f'.k{{font:400 11px "JB",monospace;letter-spacing:.9px;fill:{P["acc"]}}}'
+           f'.t{{font:600 28px "SG",sans-serif;letter-spacing:-.56px;fill:{P["ink"]}}}'
+           f'.p{{font:400 14px "IN",sans-serif;fill:{P["ink2"]}}}'
+           f'.nm{{font:600 34px "SG",sans-serif;letter-spacing:-1px;fill:{P["ink"]}}}'
+           f'.lm{{font:400 12.5px "IN",sans-serif;fill:{P["ink3"]}}}'
+           f'.b{{font:400 13px "IN",sans-serif;fill:{P["ink2"]}}}'
+           f'.b3{{font:400 13px "IN",sans-serif;fill:{P["ink3"]}}}')
+    shadow = (f'<filter id="sh" x="-5%" y="-5%" width="110%" height="120%"><feDropShadow dx="0" dy="10" stdDeviation="12" '
+              f'flood-color="{P["shadow"][0]}" flood-opacity="{P["shadow"][1]}"/></filter>')
+    label = (f'GitHub activity for {LOGIN}: {stats[0][0]} public commits, {stats[1][0]} pull requests merged, '
+             f'{stats[2][0]} contributions in the last year.')
+    return (f'<svg xmlns="http://www.w3.org/2000/svg" width="{w}" height="{height:.0f}" viewBox="0 0 {w} {height:.1f}" role="img" aria-label="{esc(label)}">'
             f'<title>{esc(label)}</title><style>{css}</style><defs>{shadow}</defs>{"".join(s)}</svg>')
 
 
 def main():
     data = demo() if "--demo" in sys.argv else fetch()
     os.makedirs(os.path.join(ROOT, "profile"), exist_ok=True)
-    for theme, name in (("light", "activity.svg"), ("dark", "activity-dark.svg")):
-        with open(os.path.join(ROOT, "profile", name), "w") as f:
+    for theme, sfx in (("light", ""), ("dark", "-dark")):
+        with open(os.path.join(ROOT, "profile", f"activity{sfx}.svg"), "w") as f:
             f.write(render(data, theme))
+        with open(os.path.join(ROOT, "profile", f"activity-m{sfx}.svg"), "w") as f:
+            f.write(render_mobile(data, theme))
     print(json.dumps({k: v for k, v in data.items() if k != "weeks"}))
 
 

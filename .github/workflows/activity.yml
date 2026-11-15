@@ -35,7 +35,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add profile/activity.svg profile/activity-dark.svg
+          git add profile/activity.svg profile/activity-dark.svg profile/activity-m.svg profile/activity-m-dark.svg
           if git diff --cached --quiet; then echo "No change"; exit 0; fi
           git commit -m "Update activity card"
           git push origin HEAD:${{ github.ref_name }}
