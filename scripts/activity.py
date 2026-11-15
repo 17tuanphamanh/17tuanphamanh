@@ -130,7 +130,7 @@ def render(data, theme):
     # header
     s.append(f'<text x="0" y="{y(11)}" class="k">ACTIVITY</text>')
     s.append(f'<text x="0" y="{y(53)}" class="t">GitHub activity</text>')
-    s.append(f'<text x="0" y="{y(85.4)}" class="p">Public contribution data, refreshed daily by a GitHub Action.</text>')
+    s.append(f'<text x="0" y="{y(85.4)}" class="p">Contributions on GitHub, refreshed daily by a GitHub Action.</text>')
     # card
     ct, ch = y(117.4), 335
     s.append(f'<rect x="0.5" y="{ct + 0.5}" width="{W - 1}" height="{ch - 1}" rx="22" fill="{P["card"]}" stroke="{P["line"]}" '
@@ -201,7 +201,7 @@ def render_mobile(data, theme):
     s = []
     s.append(f'<text x="0" y="{y(11)}" class="k">ACTIVITY</text>')
     s.append(f'<text x="0" y="{y(46)}" class="t">GitHub activity</text>')
-    s.append(f'<text x="0" y="{y(72)}" class="p">Public contribution data, refreshed daily by a GitHub Action.</text>')
+    s.append(f'<text x="0" y="{y(72)}" class="p">Contributions on GitHub, refreshed daily by a GitHub Action.</text>')
     ct, ch = y(96), 370
     s.append(f'<rect x="0.5" y="{ct + 0.5}" width="{w - 1}" height="{ch - 1}" rx="20" fill="{P["card"]}" stroke="{P["line"]}" '
              f'stroke-opacity="{P["line_op"]}" filter="url(#sh)"/>')
