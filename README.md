@@ -8,7 +8,7 @@
 
 <br><br>
 
-### Sinh viên năm cuối ngành Trí tuệ nhân tạo — Khoa học dữ liệu, Đại học FPT · 2022 – 2026
+### Sinh viên năm cuối ngành Trí tuệ nhân tạo, Đại học FPT (2022 – 2026) · đã nộp đồ án tốt nghiệp 11/2026
 
 Tôi xây dựng và vận hành sản phẩm AI trên môi trường thật. Phần khó của AI trong sản phẩm không nằm<br>
 ở lời gọi model, mà ở tầng bao quanh nó: định tuyến theo chi phí, ràng buộc định dạng đầu ra,<br>
@@ -94,6 +94,46 @@ Sáu tool: `search_occupations` · `search_majors` · `search_schools` · `web_s
 
 ---
 
+## AITHA — trợ lý AI cho IT Service Desk cấp 1 · đồ án tốt nghiệp
+
+<a href="https://github.com/17tuanphamanh/AIP_FA26_G8"><img src="https://img.shields.io/badge/AIP__FA26__G8-mã_nguồn_công_khai-181717?style=flat-square&logo=github&logoColor=white"></a>
+<a href="https://github.com/17tuanphamanh/AIP_FA26_G8/blob/main/docs/anh-demo/AITHA-anh-chup-demo-10-ca.pdf"><img src="https://img.shields.io/badge/Demo-10_ca_sử_dụng-2563EB?style=flat-square"></a>
+
+<div align="center">
+  <a href="https://github.com/17tuanphamanh/AIP_FA26_G8">
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="assets/aitha-dark.png">
+      <img src="assets/aitha-light.png" alt="AITHA kiểm tra máy người dùng rồi trả lời lỗi VPN 809 từ tài liệu nội bộ, kèm nguồn" width="80%">
+    </picture>
+  </a>
+</div>
+
+Agent nhận yêu cầu IT bằng tiếng Việt (lỗi VPN, quên mật khẩu, cài phần mềm, xin quyền thư mục), tự kiểm tra máy
+và hệ thống của người gửi, rồi trả lời từ tài liệu nội bộ hoặc thực hiện thao tác. Việc có rủi ro luôn có người duyệt.
+Đóng góp chính của đồ án là **cơ chế quyết định khi nào phải chuyển việc cho con người**.
+
+**Vai trò:** nhóm trưởng nhóm 4 người. Tôi phụ trách kiến trúc, luồng agent trên LangGraph, cơ chế chuyển người,
+luồng duyệt và thực thi, và giao diện.
+
+| Thiết kế | Vì sao |
+|---|---|
+| **Chính sách đi trước LLM** | 23 luật được xét trước, luật chặt nhất thắng, LLM không ghi đè được. Chỉ việc không luật nào phủ mới sang LLM đánh giá rủi ro, và khi chưa hiệu chỉnh thì LLM chỉ có quyền *chuyển lên người*. Lỗi ở bất kỳ bước nào trong luồng 20 bước cũng dẫn tới chuyển người. |
+| **Phiếu duyệt gắn đúng một hành động** | Phiếu mang mã băm của chính hành động được duyệt, xác nhận bằng OTP và hoàn tác được. Duyệt xong không thể bị tráo sang hành động khác. |
+| **Chống prompt injection nhiều lớp** | Mẫu cứng → model XLM-RoBERTa nhóm tự fine-tune → LLM chấm; dữ liệu nhạy cảm được che trước. |
+| **RAG lai, thiếu căn cứ thì chuyển người** | bge-m3 + BM25 trên Qdrant, có reranker. Không đủ căn cứ thì không trả lời bừa. |
+
+| Phép đo | Kết quả |
+|---|---|
+| Ca cần người mà lớp LLM bỏ sót (100 kịch bản có nhãn) | **0/24** |
+| Câu tấn công bị chặn (95 câu, gán nhãn mù) | **82%**, so với Prompt Guard 2 là 20%; chặn nhầm 1/45 |
+| Truy hồi tài liệu (34 bài) | **Recall@5 1,000** · MRR 0,845 |
+| Người thứ hai chạy lại | **90/90** quyết định khớp |
+
+Giới hạn: hệ thống mới chạy trên môi trường IT giả lập, và bộ đánh giá hiện tại chưa chứng minh được kết hợp luật với LLM
+rẻ hơn dùng luật thuần. Hơn 5.700 test pytest cùng Vitest chạy trên GitHub Actions; toàn bộ dịch vụ chạy bằng Docker Compose.
+
+---
+
 ## Machine learning & computer vision
 
 ### Dự đoán khách hàng rời bỏ — explainable ML
@@ -120,7 +160,8 @@ Năm unit test **giả lập lời gọi mạng** nên chạy được offline v
 
 <a href="https://github.com/17tuanphamanh/YOLOv8n-FireDetection"><img src="https://img.shields.io/badge/YOLOv8n--FireDetection-181717?style=flat-square&logo=github&logoColor=white"></a>
 
-YOLOv8n trên camera IP, cảnh báo Telegram kèm ảnh có bounding box.
+Fine-tune YOLOv8n cho hai lớp lửa và khói (**mAP@50 0,699** trên tập validation), chạy trên camera IP,
+cảnh báo Telegram kèm ảnh có bounding box.
 
 - **Cảnh báo theo chuyển trạng thái, không theo khung hình** — nếu gửi cảnh báo ở mỗi khung hình, một đám cháy kéo dài 10 giây sẽ sinh ra hàng trăm thông báo. Hệ thống chỉ gửi khi trạng thái chuyển từ `An toàn` sang `Nguy hiểm`, kèm khoảng chờ 20 giây giữa hai cảnh báo.
 - **Ngưỡng `conf=0.7` đặt cao có chủ đích** — đánh đổi một phần recall để giảm đáng kể tỉ lệ báo động giả, vì đám cháy thật xuất hiện liên tục qua nhiều khung hình chứ không chỉ một. Quá trình inference chạy trên thread riêng nên giao diện không bị treo.
@@ -129,8 +170,13 @@ YOLOv8n trên camera IP, cảnh báo Telegram kèm ảnh có bounding box.
 
 <a href="https://github.com/17tuanphamanh/House-Price-Prediction-using-Linear-Regression"><img src="https://img.shields.io/badge/House--Price--Prediction-181717?style=flat-square&logo=github&logoColor=white"></a>
 
-Kaggle *House Prices*, 80+ feature. Linear Regression làm baseline (CV RMSE ~36.000), so sánh Ridge, Lasso,
-Random Forest và XGBoost; tuning bằng `GridSearchCV`.
+Kaggle *House Prices*, 79 feature. Từ baseline Linear Regression 15 feature (CV RMSE ~36.000 USD), so sánh
+Linear, Ridge, Lasso, Random Forest và XGBoost bằng `GridSearchCV` dưới cùng một cách đo; Lasso được chọn theo CV
+và giảm **36% RMSE** trên tập holdout.
+
+- **Hai outlier làm vỡ model tuyến tính.** Hai căn trên 4.000 sq ft bán dưới 200.000 USD khiến một fold của Ridge
+  sai gấp nhiều lần (CV RMSE 41.353 ± 26.432). Chỉ bỏ chúng khỏi tập train (holdout giữ nguyên) thì còn 19.929 ± 1.232.
+- **XGBoost không thắng.** Sau khi làm sạch, Ridge và Lasso ngang hoặc tốt hơn XGBoost trên bộ dữ liệu 1.460 căn này.
 
 ---
 
@@ -151,12 +197,12 @@ Hệ thống đặt món trước và bán hàng tại quầy. Controller, DAO v
 | Nhóm | Công nghệ |
 |---|---|
 | **Ngôn ngữ** | Python · TypeScript · Java · SQL |
-| **AI / LLM** | Anthropic · OpenAI · Gemini · DeepSeek · function calling · structured output · streaming · prompt engineering · token & cost accounting |
-| **ML / Computer Vision** | scikit-learn · XGBoost · SHAP · YOLOv8 · OpenCV · pandas · NumPy |
+| **AI / LLM** | Anthropic · OpenAI · Gemini · DeepSeek · LangGraph · RAG (bge-m3, BM25, reranker) · function calling · structured output · streaming · human-in-the-loop · token & cost accounting |
+| **ML / Computer Vision** | scikit-learn · XGBoost · SHAP · YOLOv8 · XLM-RoBERTa · OpenCV · pandas · NumPy |
 | **Backend** | FastAPI · SQLAlchemy async · Alembic · Redis · WebSocket · JWT · OAuth2 · Java Servlet |
-| **Cơ sở dữ liệu** | PostgreSQL · SQL Server |
-| **Frontend** | Next.js 14 · React · TypeScript · Tailwind CSS · Zustand |
-| **Kiểm thử** | Playwright · Vitest · React Testing Library · MSW |
+| **Cơ sở dữ liệu** | PostgreSQL · Qdrant · SQL Server |
+| **Frontend** | Next.js 14 · React 19 · TypeScript · Tailwind CSS · Zustand |
+| **Kiểm thử** | pytest · Playwright · Vitest · React Testing Library · MSW |
 | **DevOps** | Docker · GitHub Actions · Vercel · Render · Sentry |
 
 ---
@@ -175,3 +221,30 @@ Có thể bắt đầu ngay, nhận cả thực tập và toàn thời gian.
 Hà Nội, Việt Nam
 
 </div>
+
+<details>
+<summary><b>English summary</b></summary>
+<br>
+
+Final-year Artificial Intelligence student at FPT University (2022 – 2026), graduation project submitted in November 2026.
+I build AI products that run in production. The hard part is not the model call but the layer around it: routing by cost,
+constraining output format, surviving provider failures and knowing what each request costs.
+Open to AI Engineer, Machine Learning and Data Science internships or full-time roles, available immediately.
+
+- **[VOCA](https://www.voca.io.vn)**: an AI career-guidance platform in production. I built the AI layer, backend,
+  frontend and infrastructure. It has a custom LLM gateway with tiered routing (DeepSeek for bulk work, Claude Opus for
+  once-per-session tasks), key fallback, JSON-schema output, per-request cost ledger and 8 error classes, and a
+  tool-calling advisor agent grounded in PostgreSQL with a hard cap of 5 tool iterations. Source is private; access
+  for interview review on request.
+- **[AITHA](https://github.com/17tuanphamanh/AIP_FA26_G8)** (graduation project, team lead of 4): an agent for Level-1
+  IT service desks with human-in-the-loop approval. A 23-rule policy decides before the LLM, approvals are hash-bound
+  to one action with OTP and rollback, and injection screening is layered. The LLM layer missed 0 of 24 cases that
+  needed a human, and screening caught 82% of attacks versus 20% for Prompt Guard 2.
+- **[Churn prediction](https://github.com/17tuanphamanh/churn-explainable-ml)**: HistGradientBoosting with class weights,
+  test PR-AUC 0.674, threshold chosen for a recall target, explained with SHAP.
+- **[House prices](https://github.com/17tuanphamanh/House-Price-Prediction-using-Linear-Regression)**: five models
+  tuned with GridSearchCV under one protocol; Lasso cut holdout RMSE by 36% over the baseline.
+- **[Fire detection](https://github.com/17tuanphamanh/YOLOv8n-FireDetection)**: fine-tuned YOLOv8n (mAP@50 0.699)
+  on IP cameras with state-change Telegram alerts.
+
+</details>
