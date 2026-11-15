@@ -27,7 +27,7 @@ jobs:
         uses: stats-organization/github-readme-stats-action@v2
         with:
           card: stats
-          options: username=${{ github.repository_owner }}&show_icons=true&hide=stars,issues,contribs&hide_rank=true&include_all_commits=true&hide_border=true&bg_color=00000000&title_color=2563EB&icon_color=2563EB&text_color=334155
+          options: username=${{ github.repository_owner }}&show_icons=true&hide=stars,issues,contribs&show=prs_merged,prs_merged_percentage&hide_rank=true&include_all_commits=true&hide_border=true&bg_color=00000000&title_color=2563EB&icon_color=2563EB&text_color=334155
           path: profile/stats.svg
           token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -35,7 +35,7 @@ jobs:
         uses: stats-organization/github-readme-stats-action@v2
         with:
           card: stats
-          options: username=${{ github.repository_owner }}&show_icons=true&hide=stars,issues,contribs&hide_rank=true&include_all_commits=true&hide_border=true&bg_color=00000000&title_color=60A5FA&icon_color=60A5FA&text_color=C9D1D9
+          options: username=${{ github.repository_owner }}&show_icons=true&hide=stars,issues,contribs&show=prs_merged,prs_merged_percentage&hide_rank=true&include_all_commits=true&hide_border=true&bg_color=00000000&title_color=60A5FA&icon_color=60A5FA&text_color=C9D1D9
           path: profile/stats-dark.svg
           token: ${{ secrets.GITHUB_TOKEN }}
 
