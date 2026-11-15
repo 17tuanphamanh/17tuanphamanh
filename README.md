@@ -1,11 +1,11 @@
-<img src="assets/header.svg" width="100%" alt="Phạm Tuấn Anh, AI Engineer, LLM apps, Machine Learning">
+<img src="assets/header.svg" width="100%" alt="Phạm Tuấn Anh, AI student, LLM apps, Machine Learning">
 
 <p align="center">
-  <img src="assets/typing.svg" alt="Junior AI Engineer in Hanoi. I ship LLM features to real users. Agents, RAG and the plumbing around them. Open to work, can start now.">
+  <img src="assets/typing.svg" alt="Final-year AI student in Hanoi. I ship LLM features to real users. Agents, RAG and the plumbing around them. Open to AI intern and fresher roles.">
 </p>
 
 <p align="center">
-  <img alt="Open to work" src="https://img.shields.io/badge/Open_to_work-junior_AI%2FML_roles-22C55E?style=flat-square">
+  <img alt="Open to work" src="https://img.shields.io/badge/Open_to_work-AI%2FML_intern_%C2%B7_fresher-22C55E?style=flat-square">
   <a href="mailto:phamtuana160324@gmail.com"><img alt="Email" src="https://img.shields.io/badge/Email-phamtuana160324%40gmail.com-EA4335?style=flat-square&logo=gmail&logoColor=white"></a>
   <a href="https://www.voca.io.vn"><img alt="Live project" src="https://img.shields.io/badge/Live-voca.io.vn-2563EB?style=flat-square&logo=googlechrome&logoColor=white"></a>
   <img alt="Location" src="https://img.shields.io/badge/Hanoi-Vietnam-0B1120?style=flat-square">
@@ -15,13 +15,13 @@
 
 ```python
 class TuanAnh:
-    role        = "Junior AI Engineer"
+    role        = "Final-year AI student"
     location    = "Hanoi, Vietnam"
     education   = "B.Sc. Artificial Intelligence, FPT University (2022-2026)"
     shipped     = ["voca.io.vn"]   # AI career guidance platform, live with real users
     led         = ["AITHA"]        # graduation project, IT helpdesk agent, team of 4
     works_on    = ["LLM apps", "AI agents", "RAG", "classic ML", "FastAPI backends"]
-    looking_for = "Junior AI / ML engineer role, internship or full-time"
+    looking_for = "AI / ML intern or fresher role"
     available   = True
 ```
 
