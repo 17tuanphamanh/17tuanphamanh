@@ -1,106 +1,107 @@
-<img src="assets/banner.png" alt="Phạm Tuấn Anh, AI Engineer and Machine Learning" width="100%">
+<img src="assets/header.svg" width="100%" alt="Phạm Tuấn Anh, AI Engineer, LLM apps, Machine Learning">
 
-### Hi, I'm Tuấn Anh
+<p align="center">
+  <img src="assets/typing.svg" alt="Junior AI Engineer in Hanoi. I ship LLM features to real users. Agents, RAG and the plumbing around them. Open to work, can start now.">
+</p>
 
-I'm a final-year Artificial Intelligence student at FPT University in Hanoi (2022 – 2026). I submitted my graduation
-project in November 2026 and I'm looking for a junior AI engineer or machine learning role, internship or full-time.
-I can start right away.
+<p align="center">
+  <img alt="Open to work" src="https://img.shields.io/badge/Open_to_work-junior_AI%2FML_roles-22C55E?style=flat-square">
+  <a href="mailto:phamtuana160324@gmail.com"><img alt="Email" src="https://img.shields.io/badge/Email-phamtuana160324%40gmail.com-EA4335?style=flat-square&logo=gmail&logoColor=white"></a>
+  <a href="https://www.voca.io.vn"><img alt="Live project" src="https://img.shields.io/badge/Live-voca.io.vn-2563EB?style=flat-square&logo=googlechrome&logoColor=white"></a>
+  <img alt="Location" src="https://img.shields.io/badge/Hanoi-Vietnam-0B1120?style=flat-square">
+</p>
 
-Most of what I build puts LLMs inside real products. I built the AI side of [VOCA](https://www.voca.io.vn), a career
-guidance platform that real users use, and I led the four-person team behind AITHA, an IT helpdesk agent, for my
-graduation project.
+### About me
 
-**Email:** phamtuana160324@gmail.com &nbsp;·&nbsp; **Live project:** [voca.io.vn](https://www.voca.io.vn)
+```python
+class TuanAnh:
+    role        = "Junior AI Engineer"
+    location    = "Hanoi, Vietnam"
+    education   = "B.Sc. Artificial Intelligence, FPT University (2022-2026)"
+    shipped     = ["voca.io.vn"]   # AI career guidance platform, live with real users
+    led         = ["AITHA"]        # graduation project, IT helpdesk agent, team of 4
+    works_on    = ["LLM apps", "AI agents", "RAG", "classic ML", "FastAPI backends"]
+    looking_for = "Junior AI / ML engineer role, internship or full-time"
+    available   = True
+```
 
----
+### Featured projects
 
-## VOCA: AI career guidance platform
+<table>
+<tr>
+<td width="50%" valign="top">
 
-<a href="https://www.voca.io.vn"><img src="assets/voca-preview.png" alt="VOCA home page" width="100%"></a>
+<a href="https://www.voca.io.vn"><img src="assets/voca-preview.png" alt="VOCA home page"></a>
 
-[voca.io.vn](https://www.voca.io.vn) helps high-school students choose a career and a university major. It has
-aptitude tests, an AI career advisor, school and major recommendations, and booking for sessions with mentors.
-I worked on the AI layer, the backend, the frontend and the infrastructure.
+<h3>VOCA &nbsp;·&nbsp; AI career guidance</h3>
 
-The code is private because the site has real users. I'm happy to give access during an interview.
+Live at [voca.io.vn](https://www.voca.io.vn). Aptitude tests, an AI career advisor, school and major suggestions, and
+mentor booking for high-school students. I built the AI layer, backend, frontend and infrastructure.
 
-- **LLM gateway.** All nine AI chains go through one layer I wrote between the app and the model providers.
-  High-volume calls go to DeepSeek, and the one call per session that really matters goes to Claude Opus.
-  Every call is logged with tokens and cost per user, feature and model. Failures are sorted into eight types
-  (auth, quota, rate limit, bad model, parse error and so on) and shown on the admin page. Before this, a broken
-  API key fell back to mock answers without telling anyone.
-- **Advisor agent.** The advisor calls six tools to look up occupations, majors, schools and the student's own
-  profile and recommendations in PostgreSQL, plus a web search that has to cite its source. Text streams to the user while tools are
-  still running, and the loop stops after five tool rounds so it can't burn through the token budget.
-- **Structured output.** Model output is constrained by JSON schema, so the backend never has to parse free text.
-- **Other parts:** Redis pub/sub so WebSocket messages reach users on any instance, SePay payments with
-  HMAC-verified webhooks, Google Calendar sync over OAuth2, and speech-to-text with Whisper running in the browser.
+- One LLM gateway behind all 9 AI chains: DeepSeek for bulk calls, Claude Opus for the one call per session that
+  matters, tokens and cost logged per request, failures sorted into 8 types
+- Advisor agent with 6 tools over PostgreSQL plus web search, streams while tools run, stops after 5 rounds
+- Redis pub/sub for WebSockets across instances, HMAC-checked payment webhooks, Whisper running in the browser
 
-`FastAPI` `PostgreSQL` `Redis` `Next.js` `TypeScript` `Docker`
+`FastAPI` `PostgreSQL` `Redis` `Next.js` `Docker`
 
----
+<sub>Code is private because the site has real users. Happy to share it in an interview.</sub>
 
-## AITHA: AI agent for a Level-1 IT service desk
+</td>
+<td width="50%" valign="top">
 
-<a href="https://github.com/17tuanphamanh/AIP_FA26_G8">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="assets/aitha-dark.png">
-    <img src="assets/aitha-light.png" alt="AITHA checks the user's laptop and answers a VPN 809 error from internal docs" width="100%">
-  </picture>
-</a>
+<a href="https://github.com/17tuanphamanh/AIP_FA26_G8"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/aitha-dark.png"><img src="assets/aitha-light.png" alt="AITHA answering a VPN error with a cited source"></picture></a>
 
-Graduation project, team of four, I was the team lead. [Source code](https://github.com/17tuanphamanh/AIP_FA26_G8) ·
-[10 demo cases (PDF)](https://github.com/17tuanphamanh/AIP_FA26_G8/blob/main/docs/anh-demo/AITHA-anh-chup-demo-10-ca.pdf)
+<h3>AITHA &nbsp;·&nbsp; IT helpdesk agent</h3>
 
-Employees write IT requests in Vietnamese: a VPN error, a forgotten password, a software install, access to a
-shared folder. The agent checks their machine and the related systems, then answers from internal documents or
-carries out the fix. Anything risky waits for a person to approve it. The main question of the project was how
-the system decides when a human has to step in.
+Graduation project, I led a team of 4. Handles Level-1 IT requests in Vietnamese: checks the user's machine,
+answers from internal docs or runs the fix. Anything risky waits for a human.
 
-I owned the architecture, the LangGraph workflow, the escalation logic, approvals and execution, and the web UI.
+- A 23-rule policy runs before the LLM; the LLM can escalate a request but never approve one
+- Each approval is bound to a hash of one exact action, confirmed by OTP, and can be rolled back
+- Missed **0 of 24** cases that needed a human; blocked **82%** of injection attacks
+  (Prompt Guard 2 alone: 20%); Recall@5 **1.0** on the help-article search
 
-- A policy of 23 rules runs before the LLM, the strictest matching rule wins, and the LLM cannot override it.
-  Requests that no rule covers go to an LLM risk check, which for now is only allowed to escalate, never to approve.
-- An approval is tied to a hash of one exact action, confirmed with an OTP, and can be rolled back.
-- Prompt injection goes through three layers: fixed patterns, an XLM-RoBERTa classifier the team fine-tuned,
-  and an LLM judge. Sensitive data is masked first.
+`LangGraph` `FastAPI` `Qdrant` `bge-m3` `XLM-RoBERTa` `React`
 
-What we measured, on simulated IT systems:
+<sub>[Code](https://github.com/17tuanphamanh/AIP_FA26_G8) · [10 demo cases (PDF)](https://github.com/17tuanphamanh/AIP_FA26_G8/blob/main/docs/anh-demo/AITHA-anh-chup-demo-10-ca.pdf) · tested on simulated IT systems</sub>
 
-| Test | Result |
-|---|---|
-| 100 labelled scenarios | The LLM layer missed **0 of 24** cases that needed a human |
-| 95 hand-written attack sentences, labelled blind | Caught **82%** (Meta's Prompt Guard 2 alone: 20%), 1 false alarm in 45 normal sentences |
-| Retrieval over 34 help articles | Recall@5 **1.0**, MRR 0.845 |
-| A second person re-ran the evaluation | **90 of 90** decisions matched |
+</td>
+</tr>
+</table>
 
-We haven't shown yet that mixing rules with an LLM is cheaper than rules alone, and it hasn't run against real
-company systems.
+### More projects
 
-`Python` `LangGraph` `FastAPI` `PostgreSQL` `Qdrant` `bge-m3` `XLM-RoBERTa` `React` `Docker Compose`
-
----
-
-## Smaller projects
-
-| Project | What I did | Result |
+| Project | What it shows | Result |
 |---|---|---|
-| [Customer churn](https://github.com/17tuanphamanh/churn-explainable-ml) | Churn model for 10,000 bank customers. Picked the decision threshold from a recall target of 0.70 instead of using 0.5, and used SHAP to explain it. SMOTE didn't beat class weights, and I kept that result in the report. | Test PR-AUC 0.674, ROC-AUC 0.846 |
-| [House prices](https://github.com/17tuanphamanh/House-Price-Prediction-using-Linear-Regression) | Compared five models on Kaggle House Prices with the same cross-validation setup. Two very large, cheap houses were wrecking the linear models; after dropping them from the training set, Lasso came out on top and XGBoost didn't. | Holdout RMSE 36% lower than the baseline |
-| [Fire detection](https://github.com/17tuanphamanh/YOLOv8n-FireDetection) | Fine-tuned YOLOv8n for fire and smoke on IP cameras. Sends a Telegram alert with a photo only when the state changes, not on every frame. | mAP@50 0.699 |
-| [Food pre-order](https://github.com/17tuanphamanh/swp301-block) | Java servlet app with hand-written MVC, no framework. Paid pre-orders are held and sent to the kitchen 20 minutes before pickup. | Integration tests for login, password reset and CSRF |
-| [Emotion detector](https://github.com/17tuanphamanh/emotion-detector-watson-nlp) | Flask app on IBM Watson NLP. The unit tests mock the network call so they run offline. | pylint 10/10 |
+| [Customer churn](https://github.com/17tuanphamanh/churn-explainable-ml) | Threshold picked from a recall target instead of 0.5, SHAP explanations, and a negative result kept in the report (SMOTE didn't beat class weights) | PR-AUC 0.674 |
+| [House prices](https://github.com/17tuanphamanh/House-Price-Prediction-using-Linear-Regression) | Five models under one CV setup; found two outliers that were wrecking the linear models | RMSE −36% vs baseline |
+| [Fire detection](https://github.com/17tuanphamanh/YOLOv8n-FireDetection) | Fine-tuned YOLOv8n on IP cameras, Telegram alerts only when the state changes | mAP@50 0.699 |
+| [Food pre-order](https://github.com/17tuanphamanh/swp301-block) | Java servlets with hand-written MVC; orders reach the kitchen 20 minutes before pickup | Integration tests |
+| [Emotion detector](https://github.com/17tuanphamanh/emotion-detector-watson-nlp) | Flask + IBM Watson NLP, unit tests that mock the network call | pylint 10/10 |
 
----
+### Tech stack
 
-## Skills
+<p>
+  <img src="https://skillicons.dev/icons?i=python,ts,java,postgres&perline=10" alt="Python, TypeScript, Java, PostgreSQL">
+  &nbsp;&nbsp;
+  <img src="https://skillicons.dev/icons?i=fastapi,redis,docker,githubactions&perline=10" alt="FastAPI, Redis, Docker, GitHub Actions">
+  &nbsp;&nbsp;
+  <img src="https://skillicons.dev/icons?i=sklearn,opencv,nextjs,react,tailwind&perline=10" alt="scikit-learn, OpenCV, Next.js, React, Tailwind">
+</p>
 
-**Languages:** Python, TypeScript, Java, SQL<br>
-**AI and ML:** LLM APIs (Anthropic, OpenAI, Gemini, DeepSeek), tool calling, structured output, LangGraph, RAG, scikit-learn, XGBoost, SHAP, YOLOv8, pandas<br>
-**Backend:** FastAPI, SQLAlchemy, PostgreSQL, Redis, WebSocket, Qdrant, Java Servlet, SQL Server<br>
-**Frontend:** Next.js, React, Tailwind CSS<br>
-**Tools:** Docker, GitHub Actions, pytest, Playwright, Vercel, Render, Sentry
+**Also:** Anthropic, OpenAI, Gemini and DeepSeek APIs · LangGraph · RAG with Qdrant · XGBoost · SHAP · YOLOv8 · pytest · Playwright
 
----
+### GitHub activity
 
-**Contact:** phamtuana160324@gmail.com · Hanoi, Vietnam
+<p>
+  <picture><source media="(prefers-color-scheme: dark)" srcset="profile/stats-dark.svg"><img src="profile/stats.svg" height="165" alt="GitHub stats"></picture>
+  <picture><source media="(prefers-color-scheme: dark)" srcset="profile/top-langs-dark.svg"><img src="profile/top-langs.svg" height="165" alt="Top languages"></picture>
+</p>
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="profile/snake-dark.svg">
+  <img src="profile/snake.svg" width="100%" alt="Contribution graph being eaten by a snake">
+</picture>
+
+<img src="assets/footer.svg" width="100%" alt="">
