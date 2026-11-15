@@ -1,107 +1,58 @@
-<img src="assets/header.svg" width="100%" alt="Phạm Tuấn Anh, AI student, LLM apps, Machine Learning">
-
-<p align="center">
-  <img src="assets/typing.svg" alt="Final-year AI student in Hanoi. I ship LLM features to real users. Agents, RAG and the plumbing around them. Open to AI intern and fresher roles.">
-</p>
-
-<p align="center">
-  <img alt="Open to work" src="https://img.shields.io/badge/Open_to_work-AI%2FML_intern_%C2%B7_fresher-22C55E?style=flat-square">
-  <a href="mailto:phamtuana160324@gmail.com"><img alt="Email" src="https://img.shields.io/badge/Email-phamtuana160324%40gmail.com-EA4335?style=flat-square&logo=gmail&logoColor=white"></a>
-  <a href="https://www.voca.io.vn"><img alt="Live project" src="https://img.shields.io/badge/Live-voca.io.vn-2563EB?style=flat-square&logo=googlechrome&logoColor=white"></a>
-  <img alt="Location" src="https://img.shields.io/badge/Hanoi-Vietnam-0B1120?style=flat-square">
-</p>
-
-### About me
-
-```python
-class TuanAnh:
-    role        = "Final-year AI student"
-    location    = "Hanoi, Vietnam"
-    education   = "B.Sc. Artificial Intelligence, FPT University (2022-2026)"
-    shipped     = ["voca.io.vn"]   # AI career guidance platform, live with real users
-    led         = ["AITHA"]        # graduation project, IT helpdesk agent, team of 4
-    works_on    = ["LLM apps", "AI agents", "RAG", "classic ML", "FastAPI backends"]
-    looking_for = "AI / ML intern or fresher role"
-    available   = True
-```
-
-### Featured projects
-
-<table>
-<tr>
-<td width="50%" valign="top">
-
-<a href="https://www.voca.io.vn"><img src="assets/voca-preview.png" alt="VOCA home page"></a>
-
-<h3>VOCA &nbsp;·&nbsp; AI career guidance</h3>
-
-Live at [voca.io.vn](https://www.voca.io.vn). Aptitude tests, an AI career advisor, school and major suggestions, and
-mentor booking for high-school students. I built the AI layer, backend, frontend and infrastructure.
-
-- One LLM gateway behind all 9 AI chains: DeepSeek for bulk calls, Claude Opus for the one call per session that
-  matters, tokens and cost logged per request, failures sorted into 8 types
-- Advisor agent with 6 tools over PostgreSQL plus web search, streams while tools run, stops after 5 rounds
-- Redis pub/sub for WebSockets across instances, HMAC-checked payment webhooks, Whisper running in the browser
-
-`FastAPI` `PostgreSQL` `Redis` `Next.js` `Docker`
-
-<sub>Code is private because the site has real users. Happy to share it in an interview.</sub>
-
-</td>
-<td width="50%" valign="top">
-
-<a href="https://github.com/17tuanphamanh/AIP_FA26_G8"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/aitha-dark.png"><img src="assets/aitha-light.png" alt="AITHA answering a VPN error with a cited source"></picture></a>
-
-<h3>AITHA &nbsp;·&nbsp; IT helpdesk agent</h3>
-
-Graduation project, I led a team of 4. Handles Level-1 IT requests in Vietnamese: checks the user's machine,
-answers from internal docs or runs the fix. Anything risky waits for a human.
-
-- A 23-rule policy runs before the LLM; the LLM can escalate a request but never approve one
-- Each approval is bound to a hash of one exact action, confirmed by OTP, and can be rolled back
-- Missed **0 of 24** cases that needed a human; blocked **82%** of injection attacks
-  (Prompt Guard 2 alone: 20%); Recall@5 **1.0** on the help-article search
-
-`LangGraph` `FastAPI` `Qdrant` `bge-m3` `XLM-RoBERTa` `React`
-
-<sub>[Code](https://github.com/17tuanphamanh/AIP_FA26_G8) · [10 demo cases (PDF)](https://github.com/17tuanphamanh/AIP_FA26_G8/blob/main/docs/anh-demo/AITHA-anh-chup-demo-10-ca.pdf) · tested on simulated IT systems</sub>
-
-</td>
-</tr>
-</table>
-
-### More projects
-
-| Project | What it shows | Result |
-|---|---|---|
-| [Customer churn](https://github.com/17tuanphamanh/churn-explainable-ml) | Threshold picked from a recall target instead of 0.5, SHAP explanations, and a negative result kept in the report (SMOTE didn't beat class weights) | PR-AUC 0.674 |
-| [House prices](https://github.com/17tuanphamanh/House-Price-Prediction-using-Linear-Regression) | Five models under one CV setup; found two outliers that were wrecking the linear models | RMSE −36% vs baseline |
-| [Fire detection](https://github.com/17tuanphamanh/YOLOv8n-FireDetection) | Fine-tuned YOLOv8n on IP cameras, Telegram alerts only when the state changes | mAP@50 0.699 |
-| [Food pre-order](https://github.com/17tuanphamanh/swp301-block) | Java servlets with hand-written MVC; orders reach the kitchen 20 minutes before pickup | Integration tests |
-| [Emotion detector](https://github.com/17tuanphamanh/emotion-detector-watson-nlp) | Flask + IBM Watson NLP, unit tests that mock the network call | pylint 10/10 |
-
-### Tech stack
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/readme/hero-dark.svg">
+  <img src="assets/readme/hero.svg" width="100%" alt="Phạm Tuấn Anh. Final-year AI student at FPT University, Hanoi. Open to AI/ML Engineer intern and fresher roles. I build production LLM applications, together with the evaluation, guardrails and cost controls that keep them reliable.">
+</picture>
 
 <p>
-  <img src="https://skillicons.dev/icons?i=python,ts,java,postgres&perline=10" alt="Python, TypeScript, Java, PostgreSQL">
-  &nbsp;&nbsp;
-  <img src="https://skillicons.dev/icons?i=fastapi,redis,docker,githubactions&perline=10" alt="FastAPI, Redis, Docker, GitHub Actions">
-  &nbsp;&nbsp;
-  <img src="https://skillicons.dev/icons?i=sklearn,opencv,nextjs,react,tailwind&perline=10" alt="scikit-learn, OpenCV, Next.js, React, Tailwind">
-</p>
-
-**Also:** Anthropic, OpenAI, Gemini and DeepSeek APIs · LangGraph · RAG with Qdrant · XGBoost · SHAP · YOLOv8 · pytest · Playwright
-
-### GitHub activity
-
-<p>
-  <picture><source media="(prefers-color-scheme: dark)" srcset="profile/stats-dark.svg"><img src="profile/stats.svg" height="165" alt="GitHub stats"></picture>
-  <picture><source media="(prefers-color-scheme: dark)" srcset="profile/top-langs-dark.svg"><img src="profile/top-langs.svg" height="165" alt="Top languages"></picture>
+  <a href="mailto:phamtuana160324@gmail.com"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/readme/btn0-dark.webp"><img src="assets/readme/btn0.webp" height="56" alt="Contact me"></picture></a>
+  <a href="https://www.voca.io.vn"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/readme/btn1-dark.webp"><img src="assets/readme/btn1.webp" height="56" alt="Live product: VOCA"></picture></a>
 </p>
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="profile/snake-dark.svg">
-  <img src="profile/snake.svg" width="100%" alt="Contribution graph being eaten by a snake">
+  <source media="(prefers-color-scheme: dark)" srcset="assets/readme/stack-dark.svg">
+  <img src="assets/readme/stack.svg" width="100%" alt="Tech stack: Python, FastAPI, LangGraph, Claude, DeepSeek, Gemini, Hugging Face, Qdrant, scikit-learn, pandas, NumPy, Jupyter, OpenCV, YOLOv8, PostgreSQL, Redis, SQLAlchemy, Java, TypeScript, Next.js, React, Tailwind, Docker, GitHub Actions, pytest, Git.">
 </picture>
 
-<img src="assets/footer.svg" width="100%" alt="">
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/readme/caps-dark.webp">
+  <img src="assets/readme/caps.webp" width="100%" alt="Core skills. LLM integration: a single gateway serving 9 AI chains. Agents and tool use: a tool-calling advisor and a 20-step LangGraph workflow. Retrieval: hybrid bge-m3 and BM25 with reranking, Recall@5 1.0, MRR 0.845. Guardrails: policy rules before the LLM, OTP-confirmed approvals, three-layer prompt-injection screening. Evaluation: 100 labelled scenarios, all 90 decisions reproduced. Production engineering: per-request cost ledger, CI running 5,700+ tests. Classical ML and computer vision: SHAP, YOLOv8 at mAP@50 0.699.">
+</picture>
+
+<a href="https://www.voca.io.vn"><picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/readme/voca-dark.webp">
+  <img src="assets/readme/voca.webp" width="100%" alt="Featured work, selected projects. VOCA, live in production: an AI-powered career guidance platform for Vietnamese high-school students. One LLM gateway behind 9 AI chains, a tool-calling advisor agent, real-time messaging, HMAC-verified payments and in-browser Whisper.">
+</picture></a>
+
+<a href="https://www.voca.io.vn"><picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/readme/voca-tour-dark.webp">
+  <img src="assets/readme/voca-tour.webp" width="100%" alt="Tour of VOCA's AI features: overview, interest test, profile analysis, career recommendations, schools and majors, AI advisor and AI consultation room.">
+</picture></a>
+
+<a href="https://github.com/17tuanphamanh/AIP_FA26_G8"><picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/readme/aitha-dark.webp">
+  <img src="assets/readme/aitha.webp" width="100%" alt="AITHA, graduation project, team lead of 4: a human-in-the-loop AI agent for Level-1 IT service desks. 0 of 24 escalations missed, 82% of prompt attacks blocked against a 20% Prompt Guard 2 baseline, Recall@5 1.0 on help articles.">
+</picture></a>
+
+<a href="https://github.com/17tuanphamanh/AIP_FA26_G8"><picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/readme/aitha-tour-dark.webp">
+  <img src="assets/readme/aitha-tour.webp" width="100%" alt="Tour of AITHA: employee chat, answers with a cited source, risky requests routed to a technician, the approval loop, an approval bound to one exact action, blocked prompt-injection attempts and the L2 handover note.">
+</picture></a>
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/readme/more-dark.webp">
+  <img src="assets/readme/more.webp" width="100%" alt="Other projects: machine learning and engineering. Each card links to its repository.">
+</picture>
+
+<p><a href="https://github.com/17tuanphamanh/churn-explainable-ml"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/readme/card0-dark.webp"><img src="assets/readme/card0.webp" width="33%" alt="Customer churn: explainable ML, PR-AUC 0.674"></picture></a><a href="https://github.com/17tuanphamanh/House-Price-Prediction-using-Linear-Regression"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/readme/card1-dark.webp"><img src="assets/readme/card1.webp" width="33%" alt="House prices: regression, RMSE down 36%"></picture></a><a href="https://github.com/17tuanphamanh/YOLOv8n-FireDetection"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/readme/card2-dark.webp"><img src="assets/readme/card2.webp" width="33%" alt="Fire detection: YOLOv8n, mAP@50 0.699"></picture></a></p>
+
+<p><a href="https://github.com/17tuanphamanh/swp301-block"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/readme/card3-dark.webp"><img src="assets/readme/card3.webp" width="33%" alt="Food pre-order: Java backend"></picture></a><a href="https://github.com/17tuanphamanh/emotion-detector-watson-nlp"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/readme/card4-dark.webp"><img src="assets/readme/card4.webp" width="33%" alt="Emotion detector: NLP with Watson, 10/10 pylint"></picture></a><a href="https://github.com/17tuanphamanh?tab=repositories"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/readme/card5-dark.webp"><img src="assets/readme/card5.webp" width="33%" alt="All repositories"></picture></a></p>
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="profile/activity-dark.svg">
+  <img src="profile/activity.svg" width="100%" alt="GitHub activity: public commits, merged pull requests, merge rate, languages and the contribution calendar. Rebuilt daily.">
+</picture>
+
+<a href="mailto:phamtuana160324@gmail.com"><picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/readme/footer-dark.webp">
+  <img src="assets/readme/footer.webp" width="100%" alt="Hiring an AI/ML intern or fresher? I am available to start now. Email phamtuana160324@gmail.com and I will reply within one business day.">
+</picture></a>
