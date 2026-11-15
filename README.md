@@ -18,25 +18,25 @@
   <img src="assets/readme/caps.webp" width="100%" alt="Core skills. LLM integration: a single gateway serving 9 AI chains. Agents and tool use: a tool-calling advisor and a 20-step LangGraph workflow. Retrieval: hybrid bge-m3 and BM25 with reranking, Recall@5 1.0, MRR 0.845. Guardrails: policy rules before the LLM, OTP-confirmed approvals, three-layer prompt-injection screening. Evaluation: 100 labelled scenarios, all 90 decisions reproduced. Production engineering: per-request cost ledger, CI running 5,700+ tests. Classical ML and computer vision: SHAP, YOLOv8 at mAP@50 0.699.">
 </picture>
 
-<a href="https://www.voca.io.vn"><picture>
+<p><a href="https://www.voca.io.vn"><picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/readme/voca-dark.webp">
   <img src="assets/readme/voca.webp" width="100%" alt="Featured work, selected projects. VOCA, live in production: an AI-powered career guidance platform for Vietnamese high-school students. One LLM gateway behind 9 AI chains, a tool-calling advisor agent, real-time messaging, HMAC-verified payments and in-browser Whisper.">
-</picture></a>
+</picture></a></p>
 
-<a href="https://www.voca.io.vn"><picture>
+<p><a href="https://www.voca.io.vn"><picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/readme/voca-tour-dark.webp">
   <img src="assets/readme/voca-tour.webp" width="100%" alt="Tour of VOCA's AI features: overview, interest test, profile analysis, career recommendations, schools and majors, AI advisor and AI consultation room.">
-</picture></a>
+</picture></a></p>
 
-<a href="https://github.com/17tuanphamanh/AIP_FA26_G8"><picture>
+<p><a href="https://github.com/17tuanphamanh/AIP_FA26_G8"><picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/readme/aitha-dark.webp">
   <img src="assets/readme/aitha.webp" width="100%" alt="AITHA, graduation project, team lead of 4: a human-in-the-loop AI agent for Level-1 IT service desks. 0 of 24 escalations missed, 82% of prompt attacks blocked against a 20% Prompt Guard 2 baseline, Recall@5 1.0 on help articles.">
-</picture></a>
+</picture></a></p>
 
-<a href="https://github.com/17tuanphamanh/AIP_FA26_G8"><picture>
+<p><a href="https://github.com/17tuanphamanh/AIP_FA26_G8"><picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/readme/aitha-tour-dark.webp">
   <img src="assets/readme/aitha-tour.webp" width="100%" alt="Tour of AITHA: employee chat, answers with a cited source, risky requests routed to a technician, the approval loop, an approval bound to one exact action, blocked prompt-injection attempts and the L2 handover note.">
-</picture></a>
+</picture></a></p>
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/readme/more-dark.webp">
@@ -52,7 +52,7 @@
   <img src="profile/activity.svg" width="100%" alt="GitHub activity: public commits, merged pull requests, merge rate, languages and the contribution calendar. Rebuilt daily.">
 </picture>
 
-<a href="mailto:phamtuana160324@gmail.com"><picture>
+<p><a href="mailto:phamtuana160324@gmail.com"><picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/readme/footer-dark.webp">
   <img src="assets/readme/footer.webp" width="100%" alt="Hiring an AI/ML intern or fresher? I am available to start now. Email phamtuana160324@gmail.com and I will reply within one business day.">
-</picture></a>
+</picture></a></p>
