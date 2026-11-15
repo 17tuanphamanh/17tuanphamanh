@@ -4,8 +4,8 @@
 </picture>
 
 <p>
-  <a href="mailto:phamtuana160324@gmail.com"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/readme/btn0-dark.webp"><img src="assets/readme/btn0.webp" height="56" alt="Contact me"></picture></a>
-  <a href="https://www.voca.io.vn"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/readme/btn1-dark.webp"><img src="assets/readme/btn1.webp" height="56" alt="Live product: VOCA"></picture></a>
+  <a href="mailto:phamtuana160324@gmail.com"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/readme/btn0-dark.webp"><img src="assets/readme/btn0.webp" width="19%" alt="Contact me"></picture></a>
+  <a href="https://www.voca.io.vn"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/readme/btn1-dark.webp"><img src="assets/readme/btn1.webp" width="26%" alt="Live product: VOCA"></picture></a>
 </p>
 
 <picture>
