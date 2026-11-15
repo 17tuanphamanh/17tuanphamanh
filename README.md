@@ -1,250 +1,106 @@
-<div align="center">
-  <img src="assets/banner.png" alt="Phạm Tuấn Anh — AI Engineer & Machine Learning" width="100%">
+<img src="assets/banner.png" alt="Phạm Tuấn Anh, AI Engineer and Machine Learning" width="100%">
 
-<br><br>
+### Hi, I'm Tuấn Anh
 
-<a href="https://www.voca.io.vn"><img src="https://img.shields.io/badge/Sản_phẩm_AI_đang_chạy-voca.io.vn-2563EB?style=for-the-badge&logo=googlechrome&logoColor=white&labelColor=0B1120"></a>
-<a href="mailto:phamtuana160324@gmail.com"><img src="https://img.shields.io/badge/Email-phamtuana160324@gmail.com-EA4335?style=for-the-badge&logo=gmail&logoColor=white&labelColor=0B1120"></a>
+I'm a final-year Artificial Intelligence student at FPT University in Hanoi (2022 – 2026). I submitted my graduation
+project in November 2026 and I'm looking for a junior AI engineer or machine learning role, internship or full-time.
+I can start right away.
 
-<br><br>
+Most of what I build puts LLMs inside real products. I built the AI side of [VOCA](https://www.voca.io.vn), a career
+guidance platform that real users use, and I led the four-person team behind AITHA, an IT helpdesk agent, for my
+graduation project.
 
-### Sinh viên năm cuối ngành Trí tuệ nhân tạo, Đại học FPT (2022 – 2026) · đã nộp đồ án tốt nghiệp 11/2026
-
-Tôi xây dựng và vận hành sản phẩm AI trên môi trường thật. Phần khó của AI trong sản phẩm không nằm<br>
-ở lời gọi model, mà ở tầng bao quanh nó: định tuyến theo chi phí, ràng buộc định dạng đầu ra,<br>
-xử lý khi nhà cung cấp gặp sự cố, và đo được chi phí của từng yêu cầu.
-
-**Đang tìm vị trí thực tập hoặc toàn thời gian — có thể bắt đầu ngay**
-
-</div>
+**Email:** phamtuana160324@gmail.com &nbsp;·&nbsp; **Live project:** [voca.io.vn](https://www.voca.io.vn)
 
 ---
 
-## VOCA — nền tảng hướng nghiệp có AI
+## VOCA: AI career guidance platform
 
-<div align="center">
-  <a href="https://www.voca.io.vn">
-    <img src="assets/voca-preview.png" alt="VOCA" width="86%">
-  </a>
-</div>
+<a href="https://www.voca.io.vn"><img src="assets/voca-preview.png" alt="VOCA home page" width="100%"></a>
 
-**[www.voca.io.vn](https://www.voca.io.vn)** · đang chạy production ·
-**824 file · ~107.000 dòng code · 75 migration · 19 domain**
+[voca.io.vn](https://www.voca.io.vn) helps high-school students choose a career and a university major. It has
+aptitude tests, an AI career advisor, school and major recommendations, and booking for sessions with mentors.
+I worked on the AI layer, the backend, the frontend and the infrastructure.
 
-Sản phẩm gồm bốn nhóm tính năng: trắc nghiệm đánh giá năng lực, trợ lý AI hướng nghiệp, gợi ý trường
-và ngành học, đặt lịch tư vấn với mentor. Hệ thống vận hành trên tên miền riêng, có tích hợp thanh toán,
-điều khoản sử dụng và chính sách hoàn tiền. Tôi làm cả tầng AI, backend, frontend và hạ tầng.
+The code is private because the site has real users. I'm happy to give access during an interview.
 
-> Mã nguồn để ở chế độ riêng tư do sản phẩm đang phục vụ người dùng. Tôi sẵn sàng cấp quyền truy cập
-> để đánh giá trong quá trình phỏng vấn — vui lòng liên hệ qua email.
+- **LLM gateway.** All nine AI chains go through one layer I wrote between the app and the model providers.
+  High-volume calls go to DeepSeek, and the one call per session that really matters goes to Claude Opus.
+  Every call is logged with tokens and cost per user, feature and model. Failures are sorted into eight types
+  (auth, quota, rate limit, bad model, parse error and so on) and shown on the admin page. Before this, a broken
+  API key fell back to mock answers without telling anyone.
+- **Advisor agent.** The advisor calls six tools to look up occupations, majors, schools and the student's own
+  profile and recommendations in PostgreSQL, plus a web search that has to cite its source. Text streams to the user while tools are
+  still running, and the loop stops after five tool rounds so it can't burn through the token budget.
+- **Structured output.** Model output is constrained by JSON schema, so the backend never has to parse free text.
+- **Other parts:** Redis pub/sub so WebSocket messages reach users on any instance, SePay payments with
+  HMAC-verified webhooks, Google Calendar sync over OAuth2, and speech-to-text with Whisper running in the browser.
 
-### Tầng `ai_core`
+`FastAPI` `PostgreSQL` `Redis` `Next.js` `TypeScript` `Docker`
 
-`ai_core` là tầng trung gian giữa sản phẩm và các nhà cung cấp LLM, do tôi tự thiết kế và xây dựng.
-Mỗi lời gọi đi qua năm bước:
+---
 
-| Bước | Thành phần | Việc |
+## AITHA: AI agent for a Level-1 IT service desk
+
+<a href="https://github.com/17tuanphamanh/AIP_FA26_G8">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/aitha-dark.png">
+    <img src="assets/aitha-light.png" alt="AITHA checks the user's laptop and answers a VPN 809 error from internal docs" width="100%">
+  </picture>
+</a>
+
+Graduation project, team of four, I was the team lead. [Source code](https://github.com/17tuanphamanh/AIP_FA26_G8) ·
+[10 demo cases (PDF)](https://github.com/17tuanphamanh/AIP_FA26_G8/blob/main/docs/anh-demo/AITHA-anh-chup-demo-10-ca.pdf)
+
+Employees write IT requests in Vietnamese: a VPN error, a forgotten password, a software install, access to a
+shared folder. The agent checks their machine and the related systems, then answers from internal documents or
+carries out the fix. Anything risky waits for a person to approve it. The main question of the project was how
+the system decides when a human has to step in.
+
+I owned the architecture, the LangGraph workflow, the escalation logic, approvals and execution, and the web UI.
+
+- A policy of 23 rules runs before the LLM, the strictest matching rule wins, and the LLM cannot override it.
+  Requests that no rule covers go to an LLM risk check, which for now is only allowed to escalate, never to approve.
+- An approval is tied to a hash of one exact action, confirmed with an OTP, and can be rolled back.
+- Prompt injection goes through three layers: fixed patterns, an XLM-RoBERTa classifier the team fine-tuned,
+  and an LLM judge. Sensitive data is masked first.
+
+What we measured, on simulated IT systems:
+
+| Test | Result |
+|---|---|
+| 100 labelled scenarios | The LLM layer missed **0 of 24** cases that needed a human |
+| 95 hand-written attack sentences, labelled blind | Caught **82%** (Meta's Prompt Guard 2 alone: 20%), 1 false alarm in 45 normal sentences |
+| Retrieval over 34 help articles | Recall@5 **1.0**, MRR 0.845 |
+| A second person re-ran the evaluation | **90 of 90** decisions matched |
+
+We haven't shown yet that mixing rules with an LLM is cheaper than rules alone, and it hasn't run against real
+company systems.
+
+`Python` `LangGraph` `FastAPI` `PostgreSQL` `Qdrant` `bge-m3` `XLM-RoBERTa` `React` `Docker Compose`
+
+---
+
+## Smaller projects
+
+| Project | What I did | Result |
 |---|---|---|
-| 1 | 9 AI chain | Tầng nghiệp vụ gọi xuống |
-| 2 | `routing.py` | Phân **tier** theo mức độ quan trọng: `cheap` → DeepSeek cho việc khối lượng lớn, `strong` → Anthropic Opus cho việc mỗi phiên chỉ chạy một lần |
-| 3 | `resolve_key()` | Thiếu key của provider ưu tiên thì lùi sang key đang hoạt động, rồi tới key môi trường — deployment cấu hình dở dang vẫn chạy |
-| 4 | `dispatch_json()` | Gọi model với **output ràng buộc theo JSON schema**, tầng dưới luôn nhận đúng cấu trúc |
-| 5 | `pricing.py` / `classify_error()` | Thành công thì ghi `tokens_in`, `tokens_out` và cost USD vào sổ cái. Thất bại thì phân loại thành 8 nhóm lỗi và trả lý do lên giao diện quản trị |
-
-Bốn vấn đề chỉ lộ ra khi hệ thống chạy thật, và cách tôi xử lý:
-
-| Vấn đề | Cách xử lý |
-|---|---|
-| **Chi phí LLM không kiểm soát được** | Chia tác vụ theo **tier**: việc khối lượng lớn đi DeepSeek, việc quan trọng mỗi phiên chỉ chạy một lần mới dùng Anthropic Opus. Thiếu key thì tự lùi sang key khác nên deployment cấu hình dở dang vẫn chạy được. |
-| **Không biết mỗi request tốn bao nhiêu** | Bảng giá **13 model**. Mỗi lời gọi ghi tokens và cost vào sổ cái, tách theo người dùng · tính năng · model. Model lạ lùi về mức giá thận trọng, **không bao giờ ghi cost bằng 0**. |
-| **Fallback im lặng** | Gọi model hỏng mà lặng lẽ trả mock thì người dùng cắm API key xong vẫn thấy demo, không hiểu vì sao. Lỗi được phân thành **8 nhóm** — `sdk_missing` `auth` `quota` `rate_limit` `bad_model` `bad_request` `parse` `network` — và trả lý do lên giao diện quản trị. |
-| **Output tự do làm vỡ backend** | Mọi lời gọi ràng buộc theo **JSON schema** nên tầng dưới luôn nhận đúng cấu trúc. Kèm quota theo key theo ngày; prompt tách khỏi logic chain nên sửa prompt không phải đụng code. |
-
-Chín chain đang phục vụ người dùng: `career_recommender` · `school_recommender` · `roadmap_generator` ·
-`profile_analyzer` · `expert_matcher` · `expert_review` · `consultation` · `advisor` · `base`
-
-### AI Advisor — agent tự gọi tool
-
-Chain `advisor` không chỉ sinh văn bản. Model tự xác định cần tra cứu dữ liệu nào, gọi tool tương ứng,
-đọc kết quả trả về, rồi lặp lại cho tới khi đủ thông tin để trả lời.
-
-| Bước | Việc |
-|---|---|
-| 1 | Nhận tin nhắn mới cùng lịch sử hội thoại nhiều lượt |
-| 2 | Gọi model kèm khai báo **6 tool**, đồng thời stream chữ ra cho người dùng đọc ngay |
-| 3 | Nếu model trả về khối `tool_use` → `execute_tool()` truy vấn PostgreSQL → trả `tool_result` → **quay lại bước 2** |
-| 4 | Vòng lặp chặn cứng ở `MAX_TOOL_ITERS = 5` |
-| 5 | Khi không còn `tool_use` → trả lời cuối, đã neo vào dữ liệu thật |
-
-Sáu tool: `search_occupations` · `search_majors` · `search_schools` · `web_search` ·
-`get_my_profile` · `get_my_recommendations`
-
-- **Stream và tool use chạy đồng thời.** Nội dung được đẩy tới người dùng *ngay trong lúc* model vẫn đang cân nhắc gọi tool. Nếu đợi agent hoàn tất toàn bộ mới trả kết quả, người dùng phải chờ nhiều giây trước một màn hình trống.
-- **Vòng lặp có trần cứng.** `MAX_TOOL_ITERS = 5`. Một vòng lặp không giới hạn có thể lặp vô hạn và tiêu hết ngân sách token.
-- **Neo câu trả lời vào dữ liệu thật.** Sáu tool truy vấn trực tiếp PostgreSQL, kèm một tool tìm kiếm web **bắt buộc trích dẫn nguồn**. Đây là cơ chế ngăn model đưa ra tên ngành hoặc điểm chuẩn không có thật — rủi ro nghiêm trọng nhất của một sản phẩm tư vấn hướng nghiệp.
-
-### Vài chỗ khó khác trong hệ thống
-
-| Hạng mục | Bài toán và cách giải |
-|---|---|
-| **WebSocket scale ngang** | Khi chạy nhiều instance, người dùng nối vào instance B không nhận được tin sinh ra ở instance A. Tôi giải bằng **Redis pub/sub fan-out**: instance tạo tin *chỉ publish*, listener trên mọi instance mới lo phần gửi — nhờ vậy mỗi socket nhận **đúng một lần**. Tắt Redis thì tự lùi về quản lý trong bộ nhớ. |
-| **Cổng thanh toán SePay** | Thanh toán QR, **webhook xác thực bằng chữ ký HMAC** nên không ai giả được thông báo "đã thanh toán". Có chống giao dịch trùng, payout cho mentor và luồng hoàn tiền. |
-| **Google Calendar** | Đồng bộ lịch hẹn qua **OAuth2 + Calendar API v3, gọi REST trực tiếp bằng `httpx`**, không kéo thêm thư viện client. Thiếu credentials thì mọi lối vào thành no-op an toàn, nền tảng chạy y nguyên. |
-| **Hệ thống giọng nói** | Đọc câu trả lời và nhập liệu bằng giọng nói. Tầng STT thiết kế theo **provider cắm rời**: một provider dùng Web Speech API, một provider chạy **Whisper trên WebAssembly ngay trong trình duyệt**. |
+| [Customer churn](https://github.com/17tuanphamanh/churn-explainable-ml) | Churn model for 10,000 bank customers. Picked the decision threshold from a recall target of 0.70 instead of using 0.5, and used SHAP to explain it. SMOTE didn't beat class weights, and I kept that result in the report. | Test PR-AUC 0.674, ROC-AUC 0.846 |
+| [House prices](https://github.com/17tuanphamanh/House-Price-Prediction-using-Linear-Regression) | Compared five models on Kaggle House Prices with the same cross-validation setup. Two very large, cheap houses were wrecking the linear models; after dropping them from the training set, Lasso came out on top and XGBoost didn't. | Holdout RMSE 36% lower than the baseline |
+| [Fire detection](https://github.com/17tuanphamanh/YOLOv8n-FireDetection) | Fine-tuned YOLOv8n for fire and smoke on IP cameras. Sends a Telegram alert with a photo only when the state changes, not on every frame. | mAP@50 0.699 |
+| [Food pre-order](https://github.com/17tuanphamanh/swp301-block) | Java servlet app with hand-written MVC, no framework. Paid pre-orders are held and sent to the kitchen 20 minutes before pickup. | Integration tests for login, password reset and CSRF |
+| [Emotion detector](https://github.com/17tuanphamanh/emotion-detector-watson-nlp) | Flask app on IBM Watson NLP. The unit tests mock the network call so they run offline. | pylint 10/10 |
 
 ---
 
-## AITHA — trợ lý AI cho IT Service Desk cấp 1 · đồ án tốt nghiệp
+## Skills
 
-<a href="https://github.com/17tuanphamanh/AIP_FA26_G8"><img src="https://img.shields.io/badge/AIP__FA26__G8-mã_nguồn_công_khai-181717?style=flat-square&logo=github&logoColor=white"></a>
-<a href="https://github.com/17tuanphamanh/AIP_FA26_G8/blob/main/docs/anh-demo/AITHA-anh-chup-demo-10-ca.pdf"><img src="https://img.shields.io/badge/Demo-10_ca_sử_dụng-2563EB?style=flat-square"></a>
-
-<div align="center">
-  <a href="https://github.com/17tuanphamanh/AIP_FA26_G8">
-    <picture>
-      <source media="(prefers-color-scheme: dark)" srcset="assets/aitha-dark.png">
-      <img src="assets/aitha-light.png" alt="AITHA kiểm tra máy người dùng rồi trả lời lỗi VPN 809 từ tài liệu nội bộ, kèm nguồn" width="80%">
-    </picture>
-  </a>
-</div>
-
-Agent nhận yêu cầu IT bằng tiếng Việt (lỗi VPN, quên mật khẩu, cài phần mềm, xin quyền thư mục), tự kiểm tra máy
-và hệ thống của người gửi, rồi trả lời từ tài liệu nội bộ hoặc thực hiện thao tác. Việc có rủi ro luôn có người duyệt.
-Đóng góp chính của đồ án là **cơ chế quyết định khi nào phải chuyển việc cho con người**.
-
-**Vai trò:** nhóm trưởng nhóm 4 người. Tôi phụ trách kiến trúc, luồng agent trên LangGraph, cơ chế chuyển người,
-luồng duyệt và thực thi, và giao diện.
-
-| Thiết kế | Vì sao |
-|---|---|
-| **Chính sách đi trước LLM** | 23 luật được xét trước, luật chặt nhất thắng, LLM không ghi đè được. Chỉ việc không luật nào phủ mới sang LLM đánh giá rủi ro, và khi chưa hiệu chỉnh thì LLM chỉ có quyền *chuyển lên người*. Lỗi ở bất kỳ bước nào trong luồng 20 bước cũng dẫn tới chuyển người. |
-| **Phiếu duyệt gắn đúng một hành động** | Phiếu mang mã băm của chính hành động được duyệt, xác nhận bằng OTP và hoàn tác được. Duyệt xong không thể bị tráo sang hành động khác. |
-| **Chống prompt injection nhiều lớp** | Mẫu cứng → model XLM-RoBERTa nhóm tự fine-tune → LLM chấm; dữ liệu nhạy cảm được che trước. |
-| **RAG lai, thiếu căn cứ thì chuyển người** | bge-m3 + BM25 trên Qdrant, có reranker. Không đủ căn cứ thì không trả lời bừa. |
-
-| Phép đo | Kết quả |
-|---|---|
-| Ca cần người mà lớp LLM bỏ sót (100 kịch bản có nhãn) | **0/24** |
-| Câu tấn công bị chặn (95 câu, gán nhãn mù) | **82%**, so với Prompt Guard 2 là 20%; chặn nhầm 1/45 |
-| Truy hồi tài liệu (34 bài) | **Recall@5 1,000** · MRR 0,845 |
-| Người thứ hai chạy lại | **90/90** quyết định khớp |
-
-Giới hạn: hệ thống mới chạy trên môi trường IT giả lập, và bộ đánh giá hiện tại chưa chứng minh được kết hợp luật với LLM
-rẻ hơn dùng luật thuần. Hơn 5.700 test pytest cùng Vitest chạy trên GitHub Actions; toàn bộ dịch vụ chạy bằng Docker Compose.
+**Languages:** Python, TypeScript, Java, SQL<br>
+**AI and ML:** LLM APIs (Anthropic, OpenAI, Gemini, DeepSeek), tool calling, structured output, LangGraph, RAG, scikit-learn, XGBoost, SHAP, YOLOv8, pandas<br>
+**Backend:** FastAPI, SQLAlchemy, PostgreSQL, Redis, WebSocket, Qdrant, Java Servlet, SQL Server<br>
+**Frontend:** Next.js, React, Tailwind CSS<br>
+**Tools:** Docker, GitHub Actions, pytest, Playwright, Vercel, Render, Sentry
 
 ---
 
-## Machine learning & computer vision
-
-### Dự đoán khách hàng rời bỏ — explainable ML
-
-<a href="https://github.com/17tuanphamanh/churn-explainable-ml"><img src="https://img.shields.io/badge/churn--explainable--ml-181717?style=flat-square&logo=github&logoColor=white"></a>
-<a href="https://github.com/17tuanphamanh/Churn_Data_Processing"><img src="https://img.shields.io/badge/Churn__Data__Processing-181717?style=flat-square&logo=github&logoColor=white"></a>
-
-10.000 hồ sơ khách hàng ngân hàng, churn rate 20,37%. HistGradientBoosting + `class_weight` →
-**test PR-AUC 0,674 · ROC-AUC 0,846**. SHAP cho thấy Age > NumOfProducts > Geography.
-
-- **Chọn ngưỡng theo mục tiêu nghiệp vụ, không lấy mặc định 0,5.** Chi phí của việc bỏ sót một khách hàng sắp rời bỏ cao hơn chi phí liên hệ nhầm một khách hàng vẫn đang ở lại. Tôi đặt ràng buộc recall ≥ 0,70, từ đó xác định ngưỡng 0,475 cho recall 0,690 và precision 0,513.
-- **Chống rò rỉ dữ liệu.** Preprocessor chỉ `fit` trên train rồi mới `transform` cho val/test; pipeline 8 bước, stratified 70/15/15, `random_state=42`, chạy lại ra đúng số cũ.
-- **Giữ lại kết quả âm tính.** SMOTE *không* cải thiện kết quả so với `class_weight` ở mức mất cân bằng này. Tôi giữ nguyên phát hiện đó trong báo cáo thay vì lược bỏ, vì biết một kỹ thuật không hiệu quả ở đâu cũng là một kết luận có giá trị.
-
-### Nhận diện cảm xúc văn bản — NLP
-
-<a href="https://github.com/17tuanphamanh/emotion-detector-watson-nlp"><img src="https://img.shields.io/badge/emotion--detector--watson--nlp-181717?style=flat-square&logo=github&logoColor=white"></a>
-
-Ứng dụng Flask phân tích cảm xúc của một câu tiếng Anh bằng **Watson NLP**, trả về điểm số cho năm cảm xúc
-và xác định cảm xúc trội nhất. Có tầng xử lý cho đầu vào rỗng, trả về cấu trúc rỗng thay vì để lỗi lan xuống.
-Năm unit test **giả lập lời gọi mạng** nên chạy được offline và cho kết quả tất định; pylint 10.00/10.
-
-### Phát hiện cháy thời gian thực — computer vision
-
-<a href="https://github.com/17tuanphamanh/YOLOv8n-FireDetection"><img src="https://img.shields.io/badge/YOLOv8n--FireDetection-181717?style=flat-square&logo=github&logoColor=white"></a>
-
-Fine-tune YOLOv8n cho hai lớp lửa và khói (**mAP@50 0,699** trên tập validation), chạy trên camera IP,
-cảnh báo Telegram kèm ảnh có bounding box.
-
-- **Cảnh báo theo chuyển trạng thái, không theo khung hình** — nếu gửi cảnh báo ở mỗi khung hình, một đám cháy kéo dài 10 giây sẽ sinh ra hàng trăm thông báo. Hệ thống chỉ gửi khi trạng thái chuyển từ `An toàn` sang `Nguy hiểm`, kèm khoảng chờ 20 giây giữa hai cảnh báo.
-- **Ngưỡng `conf=0.7` đặt cao có chủ đích** — đánh đổi một phần recall để giảm đáng kể tỉ lệ báo động giả, vì đám cháy thật xuất hiện liên tục qua nhiều khung hình chứ không chỉ một. Quá trình inference chạy trên thread riêng nên giao diện không bị treo.
-
-### Dự đoán giá nhà — regression
-
-<a href="https://github.com/17tuanphamanh/House-Price-Prediction-using-Linear-Regression"><img src="https://img.shields.io/badge/House--Price--Prediction-181717?style=flat-square&logo=github&logoColor=white"></a>
-
-Kaggle *House Prices*, 79 feature. Từ baseline Linear Regression 15 feature (CV RMSE ~36.000 USD), so sánh
-Linear, Ridge, Lasso, Random Forest và XGBoost bằng `GridSearchCV` dưới cùng một cách đo; Lasso được chọn theo CV
-và giảm **36% RMSE** trên tập holdout.
-
-- **Hai outlier làm vỡ model tuyến tính.** Hai căn trên 4.000 sq ft bán dưới 200.000 USD khiến một fold của Ridge
-  sai gấp nhiều lần (CV RMSE 41.353 ± 26.432). Chỉ bỏ chúng khỏi tập train (holdout giữ nguyên) thì còn 19.929 ± 1.232.
-- **XGBoost không thắng.** Sau khi làm sạch, Ridge và Lasso ngang hoặc tốt hơn XGBoost trên bộ dữ liệu 1.460 căn này.
-
----
-
-## Backend Java — không dùng framework
-
-<a href="https://github.com/17tuanphamanh/swp301-block"><img src="https://img.shields.io/badge/swp301--block-181717?style=flat-square&logo=github&logoColor=white"></a>
-
-Hệ thống đặt món trước và bán hàng tại quầy. Controller, DAO và view viết tay hết để nắm chắc MVC ba tầng.
-Đơn đặt trước *không* xuống bếp ngay khi thanh toán — hệ thống giữ lại và chỉ đẩy xuống bếp **trước giờ hẹn
-20 phút**, đủ để món vừa xong khi khách tới mà không bị nguội.
-
-## Công nghệ
-
-<div align="center">
-  <img src="https://skillicons.dev/icons?i=python,fastapi,postgres,redis,docker,githubactions,sklearn,opencv,ts,nextjs,react,tailwind,java,git,vercel&perline=8" alt="Tech stack">
-</div>
-
-| Nhóm | Công nghệ |
-|---|---|
-| **Ngôn ngữ** | Python · TypeScript · Java · SQL |
-| **AI / LLM** | Anthropic · OpenAI · Gemini · DeepSeek · LangGraph · RAG (bge-m3, BM25, reranker) · function calling · structured output · streaming · human-in-the-loop · token & cost accounting |
-| **ML / Computer Vision** | scikit-learn · XGBoost · SHAP · YOLOv8 · XLM-RoBERTa · OpenCV · pandas · NumPy |
-| **Backend** | FastAPI · SQLAlchemy async · Alembic · Redis · WebSocket · JWT · OAuth2 · Java Servlet |
-| **Cơ sở dữ liệu** | PostgreSQL · Qdrant · SQL Server |
-| **Frontend** | Next.js 14 · React 19 · TypeScript · Tailwind CSS · Zustand |
-| **Kiểm thử** | pytest · Playwright · Vitest · React Testing Library · MSW |
-| **DevOps** | Docker · GitHub Actions · Vercel · Render · Sentry |
-
----
-
-<div align="center">
-
-### Liên hệ
-
-Thực tập sinh / Fresher — **AI Engineer · Machine Learning · Data Science**
-
-Có thể bắt đầu ngay, nhận cả thực tập và toàn thời gian.
-
-<a href="mailto:phamtuana160324@gmail.com"><img src="https://img.shields.io/badge/Gmail-phamtuana160324@gmail.com-EA4335?style=for-the-badge&logo=gmail&logoColor=white&labelColor=0B1120"></a>
-<a href="https://www.voca.io.vn"><img src="https://img.shields.io/badge/Website-voca.io.vn-2563EB?style=for-the-badge&logo=googlechrome&logoColor=white&labelColor=0B1120"></a>
-
-Hà Nội, Việt Nam
-
-</div>
-
-<details>
-<summary><b>English summary</b></summary>
-<br>
-
-Final-year Artificial Intelligence student at FPT University (2022 – 2026), graduation project submitted in November 2026.
-I build AI products that run in production. The hard part is not the model call but the layer around it: routing by cost,
-constraining output format, surviving provider failures and knowing what each request costs.
-Open to AI Engineer, Machine Learning and Data Science internships or full-time roles, available immediately.
-
-- **[VOCA](https://www.voca.io.vn)**: an AI career-guidance platform in production. I built the AI layer, backend,
-  frontend and infrastructure. It has a custom LLM gateway with tiered routing (DeepSeek for bulk work, Claude Opus for
-  once-per-session tasks), key fallback, JSON-schema output, per-request cost ledger and 8 error classes, and a
-  tool-calling advisor agent grounded in PostgreSQL with a hard cap of 5 tool iterations. Source is private; access
-  for interview review on request.
-- **[AITHA](https://github.com/17tuanphamanh/AIP_FA26_G8)** (graduation project, team lead of 4): an agent for Level-1
-  IT service desks with human-in-the-loop approval. A 23-rule policy decides before the LLM, approvals are hash-bound
-  to one action with OTP and rollback, and injection screening is layered. The LLM layer missed 0 of 24 cases that
-  needed a human, and screening caught 82% of attacks versus 20% for Prompt Guard 2.
-- **[Churn prediction](https://github.com/17tuanphamanh/churn-explainable-ml)**: HistGradientBoosting with class weights,
-  test PR-AUC 0.674, threshold chosen for a recall target, explained with SHAP.
-- **[House prices](https://github.com/17tuanphamanh/House-Price-Prediction-using-Linear-Regression)**: five models
-  tuned with GridSearchCV under one protocol; Lasso cut holdout RMSE by 36% over the baseline.
-- **[Fire detection](https://github.com/17tuanphamanh/YOLOv8n-FireDetection)**: fine-tuned YOLOv8n (mAP@50 0.699)
-  on IP cameras with state-change Telegram alerts.
-
-</details>
+**Contact:** phamtuana160324@gmail.com · Hanoi, Vietnam
